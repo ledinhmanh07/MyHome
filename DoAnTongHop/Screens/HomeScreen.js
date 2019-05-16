@@ -11,6 +11,9 @@ export default class HomeScreen extends Component {
     onClickRoomDetail = () => {
         this.props.navigation.navigate('RoomDetail')
     }
+    onClickBill = () => {
+        this.props.navigation.navigate('BillScreen')
+    }
 
     render() {
         return (
@@ -23,13 +26,13 @@ export default class HomeScreen extends Component {
                     <View style={{flex: 4, width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
                         <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', flexDirection: 'row'}}>
                             <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.6, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClickRoomDetail}>
-                                    <Image source={require('@assets/images/house.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>
+                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClickRoomDetail}>
+                                    <Image source={require('@assets/images/house.png')} style={{height: '50%', width: '50%', resizeMode: 'contain', opacity: 1}}/>
                                     <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Thông Tin Phòng</Text>
                                 </TouchableOpacity>  
                             </View>  
                             <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.6, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClick}>
+                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClick}>
                                     <Image source={require('@assets/images/profile.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>   
                                     <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Thông Tin Cá Nhân</Text>
                                 </TouchableOpacity>
@@ -37,13 +40,13 @@ export default class HomeScreen extends Component {
                         </View> 
                         <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', flexDirection: 'row'}}>                           
                             <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.6, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClick}>
+                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClickBill}>
                                     <Image source={require('@assets/images/bill.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>
                                     <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Hoá Đơn</Text>
                                 </TouchableOpacity>
                             </View>  
                             <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.6, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClick}>
+                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClick}>
                                     <Image source={require('@assets/images/support.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>
                                     <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Hổ Trợ</Text>
                                 </TouchableOpacity>
