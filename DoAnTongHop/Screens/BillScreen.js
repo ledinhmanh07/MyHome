@@ -6,7 +6,7 @@ export default class HomeScreen extends Component {
     static navigationOptions = {
         title: 'Hóa Đơn',
         headerStyle: {
-            backgroundColor: '#00008B',   
+            backgroundColor: '#3B5998',   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {
@@ -30,16 +30,16 @@ export default class HomeScreen extends Component {
                         <Image source={require('@assets/images/logo.png')} style={{height: '40%', resizeMode: 'contain'}}/>
                     </View>                        
                     <View style={{flex: 4, width:'100%', height: '100%', flexDirection: 'row'}}>
-                        <View style={{alignItems: 'center', width:'50%', height: '50%'}}>
-                            <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClickEnterBill}>
-                                <Image source={require('@assets/images/bill_import.png')} style={{height: '50%', width: '50%', resizeMode: 'contain', opacity: 1}}/>
-                                <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Nhập Điện-Nước</Text>
+                        <View style={styles.viewButton}>
+                            <TouchableOpacity style={styles.button} onPress={this.onClickEnterBill}>
+                                <Image source={require('@assets/images/bill_import.png')} style={styles.icon}/>
+                                <Text style={styles.textBtn} >Nhập Điện-Nước</Text>
                             </TouchableOpacity>  
                         </View>  
-                        <View style={{alignItems: 'center', width:'50%', height: '50%'}}>
-                            <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClickHistoryBill}>
-                                <Image source={require('@assets/images/bill_history.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>   
-                                <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Lịch Sử Hóa Đơn</Text>
+                        <View style={styles.viewButton}>
+                            <TouchableOpacity style={styles.button} onPress={this.onClickHistoryBill}>
+                                <Image source={require('@assets/images/bill.png')} style={styles.icon}/>   
+                                <Text style={styles.textBtn} >Lịch Sử Hóa Đơn</Text>
                             </TouchableOpacity>
                         </View> 
                         
@@ -51,5 +51,39 @@ export default class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({       
-
+    viewButton: {
+        alignItems: 'center', 
+        width:'50%', 
+        height: '50%'
+    },
+    button: { 
+        height: '80%', 
+        width: '80%', 
+        backgroundColor: '#FFFFFF', 
+        opacity:0.8, 
+        alignItems: 'center', 
+        justifyContent: 'center',  
+        borderRadius: 10,
+        borderWidth: 0.5,
+        borderColor: '#000',
+        shadowColor: '#000000', 
+        shadowOffset: { 
+            width: 0, 
+            height: 3 
+        }, 
+        shadowRadius: 5, 
+        shadowOpacity: 0.5,
+        elevation: 5,
+    },
+    icon: {
+        height: '50%', 
+        width: '50%', 
+        resizeMode: 'contain'
+    },
+    textBtn: {  
+        fontSize:20, 
+        color: '#000', 
+        textAlign: 'center', 
+        width: '80%'
+    }
 })

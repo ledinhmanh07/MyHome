@@ -14,6 +14,9 @@ export default class HomeScreen extends Component {
     onClickBill = () => {
         this.props.navigation.navigate('BillScreen')
     }
+    onClickProfile = () => {
+        this.props.navigation.navigate('ProfileScreen')
+    }
 
     render() {
         return (
@@ -24,31 +27,31 @@ export default class HomeScreen extends Component {
                         <Image source={require('@assets/images/logo.png')} style={{height: '40%', resizeMode: 'contain'}}/>
                     </View>                        
                     <View style={{flex: 4, width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                        <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', flexDirection: 'row'}}>
-                            <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClickRoomDetail}>
-                                    <Image source={require('@assets/images/house.png')} style={{height: '50%', width: '50%', resizeMode: 'contain', opacity: 1}}/>
-                                    <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Thông Tin Phòng</Text>
+                        <View style={styles.viewRowButton}>
+                            <View style={styles.viewButton}>
+                                <TouchableOpacity style={styles.button} onPress={this.onClickRoomDetail}>
+                                    <Image source={require('@assets/images/house.png')} style={styles.icon}/>
+                                    <Text style={styles.textBtn} >Thông Tin Phòng</Text>
                                 </TouchableOpacity>  
                             </View>  
-                            <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClick}>
-                                    <Image source={require('@assets/images/profile.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>   
-                                    <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Thông Tin Cá Nhân</Text>
+                            <View style={styles.viewButton}>
+                                <TouchableOpacity style={styles.button} onPress={this.onClickProfile}>
+                                    <Image source={require('@assets/images/profile.png')} style={styles.icon}/>   
+                                    <Text style={styles.textBtn} >Thông Tin Cá Nhân</Text>
                                 </TouchableOpacity>
                             </View> 
                         </View> 
-                        <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', flexDirection: 'row'}}>                           
-                            <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClickBill}>
-                                    <Image source={require('@assets/images/bill.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>
-                                    <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Hoá Đơn</Text>
+                        <View style={styles.viewRowButton}>                           
+                            <View style={styles.viewButton}>
+                                <TouchableOpacity style={styles.button} onPress={this.onClickBill}>
+                                    <Image source={require('@assets/images/bill.png')} style={styles.icon}/>
+                                    <Text style={styles.textBtn} >Hoá Đơn</Text>
                                 </TouchableOpacity>
                             </View>  
-                            <View style={{flex: 1, alignItems: 'center', width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                <TouchableOpacity style={{ height: '80%', width: '80%', backgroundColor: '#3A5FCD', opacity:0.7, alignItems: 'center', justifyContent: 'center',  borderRadius: 10}} onPress={this.onClick}>
-                                    <Image source={require('@assets/images/support.png')} style={{height: '50%', width: '50%', resizeMode: 'contain'}}/>
-                                    <Text style={{fontSize:20, color: '#FFFFFF', textAlign: 'center', width: '80%'}} >Hổ Trợ</Text>
+                            <View style={styles.viewButton}>
+                                <TouchableOpacity style={styles.button} onPress={this.onClick}>
+                                    <Image source={require('@assets/images/support.png')} style={styles.icon}/>
+                                    <Text style={styles.textBtn} >Hổ Trợ</Text>
                                 </TouchableOpacity>
                             </View> 
                         </View>     
@@ -59,6 +62,50 @@ export default class HomeScreen extends Component {
     }
 }
 
-const styles = StyleSheet.create({       
-
+const styles = StyleSheet.create({    
+    viewRowButton: {
+        flex: 1, 
+        alignItems: 'center', 
+        width:'100%', 
+        height: '100%', 
+        flexDirection: 'row'
+    },
+    viewButton: {
+        flex: 1, 
+        alignItems: 'center', 
+        width:'100%', 
+        height: '100%', 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    },   
+    button: {
+        height: '80%', 
+        width: '80%', 
+        backgroundColor: '#FFFFFF', 
+        opacity:0.8, 
+        alignItems: 'center', 
+        justifyContent: 'center',  
+        borderRadius: 10,        
+        borderWidth: 0.5,
+        borderColor: '#000',
+        shadowColor: '#000000', 
+        shadowOffset: { 
+            width: 0, 
+            height: 3 
+        }, 
+        shadowRadius: 5, 
+        shadowOpacity: 0.5,
+        elevation: 5,
+    },
+    icon: {
+        height: '50%', 
+        width: '50%', 
+        resizeMode: 'contain'
+    },
+    textBtn: {  
+        fontSize:20, 
+        color: '#000', 
+        textAlign: 'center', 
+        width: '80%'
+    }
 })

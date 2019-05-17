@@ -6,7 +6,7 @@ export default class RoomDetail extends Component {
     static navigationOptions = {
         title: 'Nhập Điện-Nước',
         headerStyle: {
-            backgroundColor: '#00008B',   
+            backgroundColor: '#3B5998',   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {
@@ -29,29 +29,29 @@ export default class RoomDetail extends Component {
                         <Image source={require('@assets/images/logo.png')} style={{height: '40%', resizeMode: 'contain'}}/>                 
                         <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '5%'}}>PHÒNG: 411</Text>
                     </View>   
-                    <View style={{flex: 8, backgroundColor: '#ffffff', elevation: 10, alignItems: 'center', width: '80%', marginBottom: 20, marginTop: 20, borderRadius: 20}}>
-                        <Text style={{flex: 1, color: '#000', fontSize: 20, marginTop: 10, fontWeight: 'bold'}}>Số Điện-Nước: 5/2019</Text>
+                    <View style={styles.form}>
+                        <Text style={{flex: 1, color: '#000', fontSize: 20, marginTop: 15, fontWeight: 'bold'}}>Số Điện-Nước: 5/2019</Text>
                         <View style={{flex:3, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
-                            <View style={{flexDirection: 'row', width: '80%', height: '50%', alignItems: 'center'}}>
+                            <View style={styles.viewInput}>
                                 <Text style={{ color: '#000', fontSize: 20, width: '40%'}}>Số Điện:</Text>
                                 <TextInput
                                     placeholder='Số điện,...'
-                                    style={{ textAlign: 'center', fontSize:20, backgroundColor: '#F5F5F5', height: '40%', width: '50%', borderRadius: 20, borderWidth: 0.5}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />   
                             </View>
                             
-                            <View style={{flexDirection: 'row', width: '80%', height: '50%', alignItems: 'center'}}>
+                            <View style={styles.viewInput}>
                                 <Text style={{ color: '#000', fontSize: 20, width: '40%'}}>Số Nước:</Text>
                                 <TextInput
                                     placeholder='Số điện,...'
-                                    style={{textAlign: 'center', fontSize: 20, backgroundColor: '#F5F5F5', height: '40%', width: '50%',borderRadius: 20, borderWidth: 0.5}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />   
                             </View>
                         </View>
-                        <View style={{flex:1, width: '100%', height: '100%', alignItems: 'center',}}>
-                            <TouchableOpacity style={{height: '50%', width: '80%', backgroundColor: '#3A5FCD', alignItems: 'center', justifyContent: 'center'}} onPress={this.onClick}>
+                        <View style={styles.viewButton}>
+                            <TouchableOpacity style={styles.button} onPress={this.onClick}>
                                 <Text style={{fontSize:20, color: '#FFFFFF'}} >CẬP NHẬP</Text>
                             </TouchableOpacity>  
                         </View>
@@ -70,6 +70,52 @@ export default class RoomDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-       
-
+    form: {
+        flex: 8, 
+        backgroundColor: '#ffffff',         
+        alignItems: 'center', 
+        width: '80%', 
+        marginBottom: 20, 
+        marginTop: 20, 
+        borderRadius: 20,  
+        shadowColor: '#000000', 
+        shadowOffset: { 
+            width: 0, 
+            height: 3 
+        }, 
+        shadowRadius: 5, 
+        shadowOpacity: 0.5,
+        elevation: 10, 
+    },
+    input: { 
+        textAlign: 'center', 
+        fontSize:20, 
+        backgroundColor: '#F5F5F5', 
+        height: '40%', 
+        width: '50%', 
+        borderRadius: 20, 
+        borderWidth: 0.5
+    },
+    button: {
+        height: '60%', 
+        width: '80%', 
+        backgroundColor: '#3A5FCD', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        borderRadius: 10
+    },
+    viewInput: {
+        flexDirection: 'row', 
+        width: '80%', 
+        height: '50%', 
+        alignItems: 'center'
+    },
+    viewButton: {
+        flex:1, 
+        width: '100%', 
+        height: '100%', 
+        alignItems: 'center', 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    }
 })
