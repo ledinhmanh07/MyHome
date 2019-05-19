@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#3A5FCD', 
         alignItems: 'center', 
         justifyContent: 'center', 
-        borderRadius: 10
+        borderRadius: 5
     },
     viewInput: {
         flexDirection: 'row', 
