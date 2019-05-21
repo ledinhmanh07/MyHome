@@ -60,7 +60,7 @@ export default class RoomDetail extends Component {
                         <Text style={{flex: 1, color: '#000', fontSize: 20, marginTop: 10, fontWeight: 'bold'}}>Số Điện-Nước: 4/2019</Text>
                         <View style={{flex: 1, flexDirection: 'row', width: '100%', height: '50%', justifyContent : 'center'}}>
                             <Text style={{ color: '#000', fontSize: 15, width: '40%'}}>Số Điện: 150 (kW)</Text>
-                            <Text style={{ color: '#000', fontSize: 15, width: '40%', marginLeft: '10%'}}>Số Nước: 200 (m2)</Text>
+                            <Text style={{ color: '#000', fontSize: 15, width: '40%', marginLeft: '10%'}}>Số Nước: 200 (Khối)</Text>
                         </View>
                     </View> 
                 </View>  

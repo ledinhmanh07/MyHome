@@ -62,7 +62,7 @@ export default class CreateProfileScreen extends Component {
                                 <TextInput                            
                                     placeholder='Ngày sinh,...'
                                     placeholderTextColor = '#777777'
-                                    style={{textAlign: 'center', color: '#000', width: '70%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
+                                    style={{textAlign: 'center', color: '#000',  marginLeft: '2%', width: '63%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
                                     onChangeText={(text) => this.setState({text})}
                                 />  
                             </View>

@@ -9,7 +9,7 @@ export default class LoginScreen extends Component {
     };
 
     onClick = () => {
-        this.props.navigation.navigate('HomeScreen')
+        this.props.navigation.replace('HomeScreen')
     }
 
     render() {

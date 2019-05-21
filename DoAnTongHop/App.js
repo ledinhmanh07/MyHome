@@ -10,6 +10,7 @@ import ProfileScreen from '@screens/ProfileScreen';
 import BillHistoryScreen from '@screens/BillHistoryScreen';
 import UpdateProfileScreen from '@screens/UpdateProfileScreen';
 import CreateProfileScreen from '@screens/CreateProfileScreen';
+import CurrentBillScreen from '@screens/CurrentBillScreen';
 
 const MainNavigator = Platform.OS === 'ios' ? createStackNavigator({
   LoginScreen: { screen: LoginScreen }, 
@@ -21,7 +22,9 @@ const MainNavigator = Platform.OS === 'ios' ? createStackNavigator({
   ProfileScreen: { screen: ProfileScreen },   
   UpdateProfileScreen: { screen: UpdateProfileScreen }, 
   CreateProfileScreen: { screen: CreateProfileScreen }, 
+  CurrentBillScreen: { screen: CurrentBillScreen },
 }) : createStackNavigator({   
+  CurrentBillScreen: { screen: CurrentBillScreen },
   LoginScreen: { screen: LoginScreen }, 
   ProfileScreen: { screen: ProfileScreen }, 
   BillHistoryScreen: { screen: BillHistoryScreen }, 

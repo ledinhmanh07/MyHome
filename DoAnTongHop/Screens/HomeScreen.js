@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
 
 export default class HomeScreen extends Component {
     
@@ -19,14 +19,15 @@ export default class HomeScreen extends Component {
     }
 
     render() {
-        return (
+        return (            
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
                 <View style={{ flex: 1, alignItems: 'center'}}>
-                    <View style={{flex: 2 , alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flex: 1}}></View>
+                    <View style={{flex: 9 , alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 25, fontWeight: 'bold', color: '#8B0000'}}>NHÀ TRỌ THÔNG MINH</Text>
                         <Image source={require('@assets/images/logo.png')} style={{height: '40%', resizeMode: 'contain'}}/>
                     </View>                        
-                    <View style={{flex: 4, width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{flex: 19, width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
                         <View style={styles.viewRowButton}>
                             <View style={styles.viewButton}>
                                 <TouchableOpacity style={styles.button} onPress={this.onClickRoomDetail}>
@@ -56,6 +57,7 @@ export default class HomeScreen extends Component {
                             </View> 
                         </View>     
                     </View>
+                    <View style={{flex: 1}}></View>
                 </View>
             </ImageBackground>
         )
