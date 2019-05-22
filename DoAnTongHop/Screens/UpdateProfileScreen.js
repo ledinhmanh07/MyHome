@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import * as Common from '@constans/Common'
 
 export default class UpdateProfileScreen extends Component {
     
@@ -24,76 +25,72 @@ export default class UpdateProfileScreen extends Component {
     render() {
         return (                        
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', height: '100%'}} >       
-                    <View style={{flex: 1, width: '60%', justifyContent : 'center', alignItems: 'center'}}>
-                        
-                    </View>   
+                <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', height: '100%', marginTop: Common.deviceHeight/10, marginBottom: Common.deviceHeight/10}} >       
+                      
                     <View style={styles.form}>
                         <View style={{flex:6, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
                             <View style={styles.viewInput}>
-                                <Text style={{ color: '#000', fontSize: 16, width: '35%'}}>Họ và tên</Text>
+                                <Text style={styles.label}>Họ và tên</Text>
                                 <TextInput                            
                                     placeholder='Họ và tên,...'
                                     placeholderTextColor = '#777777'
-                                    style={{textAlign: 'center', color: '#000',marginLeft: '2%', width: '63%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />
                             </View>                            
                             <View style={styles.viewInput}>
-                                <Text style={{ color: '#000', fontSize: 16, width: '35%'}}>Giới tính</Text>
+                                <Text style={styles.label}>Giới tính</Text>
                                 <TextInput                            
                                     placeholder='Giới tính,...'
                                     placeholderTextColor = '#777777'
-                                    style={{textAlign: 'center', color: '#000', marginLeft: '2%', width: '63%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
-                                <Text style={{ color: '#000', fontSize: 16, width: '35%'}}>Nghề nghiệp</Text>
+                                <Text style={styles.label}>Nghề nghiệp</Text>
                                 <TextInput                            
                                     placeholder='Nghề nghiệp,...'
                                     placeholderTextColor = '#777777'
-                                    style={{textAlign: 'center', color: '#000', marginLeft: '2%', width: '63%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
-                                <Text style={{ color: '#000', fontSize: 16, width: '35%'}}>Ngày sinh</Text>
+                                <Text style={styles.label}>Ngày sinh</Text>
                                 <TextInput                            
                                     placeholder='Ngày sinh,...'
                                     placeholderTextColor = '#777777'
-                                    style={{textAlign: 'center', color: '#000', marginLeft: '2%', width: '63%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
-                                <Text style={{ color: '#000', fontSize: 16, width: '35%'}}>Số CMND</Text>
+                                <Text style={styles.label}>Số CMND</Text>
                                 <TextInput                            
                                     placeholder='Số CMND,...'
                                     placeholderTextColor = '#777777'
-                                    style={{textAlign: 'center', color: '#000', marginLeft: '2%', width: '63%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
-                                <Text style={{ color: '#000', fontSize: 16, width: '35%'}}>HKTT</Text>
+                                <Text style={styles.label}>HKTT</Text>
                                 <TextInput                            
                                     placeholder='Hộ khẩu thường trú,...'
                                     placeholderTextColor = '#777777'
-                                    style={{textAlign: 'center', color: '#000', marginLeft: '2%', width: '63%', height: '60%', fontSize:15, borderBottomColor: '#000', borderBottomWidth: 1}}
+                                    style={styles.input}
                                     onChangeText={(text) => this.setState({text})}
                                 />  
                             </View>
                         </View>
                         <View style={styles.viewButton}>
                             <TouchableOpacity style={styles.button} onPress={this.onClick}>
-                                <Text style={{fontSize:20, color: '#fff'}} >Lưu</Text>
+                                <Text style={{fontSize:Common.titleSize, color: '#fff'}} >Lưu</Text>
                             </TouchableOpacity>  
                         </View>
                     </View>   
-                    <View style={{flex: 1, width: '80%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#008080'}}>
-                        
-                    </View> 
+                    
                 </View>  
             </ImageBackground>
         )
@@ -115,15 +112,16 @@ const styles = StyleSheet.create({
         shadowRadius: 5, 
         shadowOpacity: 0.5,
         elevation: 10, 
-    },
-    input: { 
+    },    
+    input: {
         textAlign: 'center', 
-        fontSize:20, 
-        backgroundColor: '#F5F5F5', 
-        height: '40%', 
-        width: '50%', 
-        borderRadius: 20, 
-        borderWidth: 0.5
+        color: '#000',
+        marginLeft: '2%', 
+        width: '63%', 
+        height: '60%', 
+        fontSize:Common.textSizeInput, 
+        borderBottomColor: '#000', 
+        borderBottomWidth: 1
     },
     button: {
         height: '60%', 
@@ -146,5 +144,10 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         alignItems: 'center', 
         justifyContent: 'center'
+    },
+    label: { 
+        color: '#000', 
+        fontSize: Common.labelSize, 
+        width: '35%'
     }
 })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, ScrollView } from 'react-native'
+import * as Common from '@constans/Common'
 
 export default class RoomDetail extends Component {
     
@@ -27,16 +28,16 @@ export default class RoomDetail extends Component {
                 <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
                     <View style={{width: '70%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#008080'}}>
                         <Image source={require('@assets/images/logo.png')} style={{height: 80, resizeMode: 'contain', marginVertical: 10}}/>                 
-                        <Text style={{fontSize: 25, fontWeight: 'bold', marginBottom: 20}}>PHÒNG: 411</Text>
+                        <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>PHÒNG: 411</Text>
                     </View>   
                     <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
-                        <Text style={{fontSize: 20, color: '#000000', width: '70%', textAlign: 'center'}}>Diện tích: 10*10(m2)</Text>
-                        <Text style={{fontSize: 20, color: '#000000', width: '70%', textAlign: 'center'}}>Giá phòng: 3.800.000vnđ / 1 tháng</Text>
-                        <Text style={{fontSize: 20, color: '#000000', width: '70%', textAlign: 'center'}}>Giá điện: 4.000vnđ / 1KW</Text>
-                        <Text style={{fontSize: 20, color: '#000000', width: '70%', textAlign: 'center'}}>Giá nước: 15.000 vnđ / 1 khối</Text>
-                        <Text style={{fontSize: 20, color: '#000000', width: '70%', textAlign: 'center'}}>Mô tả: </Text>
-                        <Text style={{fontSize: 20, color: '#000000', width: '70%', textAlign: 'center'}}>Phòng có 1 gác, có phòng tắm vệ sinh riêng, có kệ bếp và bồn rữa chén.</Text>
-                        <Text style={{fontSize: 20, color: '#000000', width: '70%', textAlign: 'center'}}>Thông tin thêm: </Text>
+                        <Text style={styles.text}>Diện tích: 10*10(m2)</Text>
+                        <Text style={styles.text}>Giá phòng: 3.800.000vnđ / 1 tháng</Text>
+                        <Text style={styles.text}>Giá điện: 4.000vnđ / 1KW</Text>
+                        <Text style={styles.text}>Giá nước: 15.000 vnđ / 1 khối</Text>
+                        <Text style={styles.text}>Mô tả: </Text>
+                        <Text style={styles.text}>Phòng có 1 gác, có phòng tắm vệ sinh riêng, có kệ bếp và bồn rữa chén.</Text>
+                        <Text style={styles.text}>Thông tin thêm: </Text>
                     </View>   
                 </ScrollView>  
             </ImageBackground>
@@ -45,6 +46,10 @@ export default class RoomDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-       
-
+    text: {
+        fontSize: Common.labelSize, 
+        color: '#000000', 
+        width: '70%', 
+        textAlign: 'center'
+    }
 })

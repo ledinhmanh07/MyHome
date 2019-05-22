@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, ImageBackground ,Text, StyleSheet } from 'react-native'
+import * as Common from '@constans/Common'
 
 export default class CurrentBillScreen extends Component {
     
     static navigationOptions = {
-        title: 'Thêm Thông Tin',
+        title: 'Hóa Đơn',
         headerStyle: {
             backgroundColor: '#3B5998',   
           },
@@ -23,22 +24,94 @@ export default class CurrentBillScreen extends Component {
 
     render() {
         return (                        
-            <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', height: '100%'}} >       
-                    <View style={{flex: 1, width: '60%', justifyContent : 'center', alignItems: 'center'}}>
-                        
-                    </View>   
+            <ImageBackground source={require('@assets/images/background.png')} style={{flex: 1, width: '100%', height: '100%'}}>
+                <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', marginVertical: 25}}>
                     <View style={styles.form}>
-                        <View style={{flex: 1, width: '100%', height: '100%'}}>
-                            <Text>1. Nước</Text>
-                            <Text>Số cũ: 50     Số mới: 100</Text>
-                            <Text>Số Lượng: 50  Gía: 4.000  Thành tiền: 200.000</Text>
+                        <View  style={{flex: 2, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
+                            <Text style={{fontWeight: 'bold', fontSize: Common.labelSize}}>HÓA ĐƠN 5/2019</Text>                                
                         </View> 
-                    </View>   
-                    <View style={{flex: 1, width: '80%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#008080'}}>
-                        
-                    </View> 
-                </View>  
+                        <View style={[styles.column, {flex: 4}]}>
+                            <View  style={{flex: 1, width: '100%', height: '100%', justifyContent: 'center'}}>
+                                <Text style={styles.label}>1. Nước</Text>
+                            </View>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.value}>Số cũ: </Text>
+                                <Text style={styles.value}>Số mới: </Text>
+                            </View>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.value}>Số lượng:  </Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>
+                        </View> 
+                        <View style={[styles.column, {flex: 4}]}>
+                            <View  style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center'}}>
+                                <Text style={styles.label}>2. Điện</Text>
+                            </View>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.value}>Số cũ: </Text>
+                                <Text style={styles.value}>Số mới: </Text>
+                            </View>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.value}>Số lượng:  </Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>
+                        </View> 
+                        <View style={[styles.column, {flex: 3}]}>
+                            <View  style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center'}}>
+                                <Text style={styles.label}>3. Quản lý xe:</Text>
+                            </View>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.value}>Số lượng: </Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>                            
+                        </View> 
+                        <View style={[styles.column, {flex: 2}]}>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.label}>4. Vệ sinh:</Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>                            
+                        </View> 
+                        <View style={[styles.column, {flex: 2}]}>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.label}>5. Truyền hình cáp:</Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>                            
+                        </View> 
+                        <View style={[styles.column, {flex: 2}]}>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.label}>6. Internet:</Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>                            
+                        </View> 
+                        <View style={[styles.column, {flex: 2}]}>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.label}>7. Khác:</Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>                            
+                        </View> 
+                        <View style={[styles.column, {flex: 2}]}>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.label}>8. Tiền phòng:</Text>
+                                <Text style={styles.value}>Thành tiền:</Text>
+                            </View>                            
+                        </View> 
+                        <View style={[styles.column, {flex: 2}]}>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.label}>9. Tiền cọc:</Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>                            
+                        </View> 
+                        <View style={[styles.column, {flex: 2}]}>
+                            <View  style={[styles.item]}>
+                                <Text style={styles.label}>10. Nợ cũ:</Text>
+                                <Text style={styles.value}>Thành tiền: </Text>
+                            </View>                            
+                        </View> 
+                        <View  style={{flex: 2, width: '100%', height: '100%', justifyContent : 'center'}}>
+                            <Text style={{fontWeight: 'bold', fontSize: Common.labelSize}}>Tổng cộng:</Text>                                
+                        </View>                      
+                    </View>  
+                </View>
             </ImageBackground>
         )
     }
@@ -46,8 +119,11 @@ export default class CurrentBillScreen extends Component {
 
 const styles = StyleSheet.create({
     form: {
-        flex: 8, 
-        backgroundColor: '#ffffff',         
+        flex: 10, 
+        backgroundColor: '#ffffff',      
+        paddingHorizontal: '5%',   
+        paddingTop: 5,
+        paddingBottom: 5,
         alignItems: 'center', 
         width: '90%', 
         borderRadius: 20,  
@@ -60,35 +136,26 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         elevation: 10, 
     },
-    input: { 
-        textAlign: 'center', 
-        fontSize:20, 
-        backgroundColor: '#F5F5F5', 
-        height: '40%', 
-        width: '50%', 
-        borderRadius: 20, 
-        borderWidth: 0.5
-    },
-    button: {
-        height: '60%', 
-        width: '80%', 
-        backgroundColor: '#3A5FCD', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        borderRadius: 5
-    },
-    viewInput: {
-        flexDirection: 'row', 
-        width: '85%', 
-        height: '15%', 
-        alignItems: 'center',
-    },
-    viewButton: {
-        flex:1, 
+    column :{
         width: '100%', 
         height: '100%', 
-        alignItems: 'center', 
-        alignItems: 'center', 
-        justifyContent: 'center'
+        borderBottomWidth: 0.5
+    },
+    item: {
+        flex: 1, 
+        flexDirection: 'row', 
+        width: '100%', 
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    value: {
+        flex: 1, 
+        fontSize: Common.textSize
+    },
+    label: {
+        flex: 1, 
+        fontWeight: 'bold', 
+        fontSize: Common.textSize
     }
 })

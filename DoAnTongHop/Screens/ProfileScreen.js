@@ -2,7 +2,31 @@ import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 
 export default class ProfileScreen extends Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile : [
+                {
+                    name: 'Lê Đình Mạnh',
+                    birthday: '10/02/1997',
+                    sex: 'Nam',
+                    job: 'Sinh Viên',
+                    cmnd: '285612119',
+                    hktt: '131 Bùi Đình Túy, Bình Thạnh, Tp.HCM'
+                },
+                {
+                    name: 'Võ Đình Phước Trung',
+                    birthday: '22/06/1997',
+                    sex: 'Nam',
+                    job: 'Sinh Viên',
+                    cmnd: '285612117',
+                    hktt: '131 Bùi Đình Túy, Bình Thạnh, Tp.HCM'
+                },
+            ],
+        }
+        
+    }
+
     static navigationOptions = {
         title: 'Thông Tin',
         headerStyle: {
@@ -22,8 +46,7 @@ export default class ProfileScreen extends Component {
     }
     onClickCreateProfile = () => {
         this.props.navigation.navigate('CreateProfileScreen')
-    }
-    
+    }    
     render() {
         return (
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
@@ -31,40 +54,28 @@ export default class ProfileScreen extends Component {
                     <View style={{flex: 4, width: '100%', height: '100%'}}>
                         <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
                             <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
-                                <View style={styles.profile}>
-                                    <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>
-                                        <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 5}}>Lê Đình Mạnh (Sinh Viên)</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>Giới tính: Nam</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>Ngày sinh: 10/02/1997</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>CMND: 285612119</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>Địa chỉ thường trú: 131 Bùi Đình Túy, Bình Thạnh, Tp.HCM</Text>
-                                    </View>
-                                    <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
-                                        <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.5}} onPress={this.onClickUpdateProfile}>
-                                            <Text style={{fontSize:15, color: '#000000'}} >Sửa</Text>
-                                        </TouchableOpacity>  
-                                        <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center'}} onPress={this.onClick}>
-                                            <Text style={{fontSize:15, color: '#000000'}} >Xoá</Text>
-                                        </TouchableOpacity>  
-                                    </View>
-                                </View>
-                                <View style={styles.profile}>
-                                    <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>
-                                        <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 5}}>Võ Đình Phước Trung (Sinh Viên)</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>Giới tính: Nam</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>Ngày sinh: 22/06/1997</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>CMND: 285612125</Text>
-                                        <Text style={{fontSize: 15, width: '100%'}}>Địa chỉ thường trú: 131 Bùi Đình Túy, Bình Thạnh, Tp.HCM</Text>
-                                    </View>
-                                    <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
-                                        <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.5}} onPress={this.onClickUpdateProfile}>
-                                            <Text style={{fontSize:15, color: '#000000'}} >Sửa</Text>
-                                        </TouchableOpacity>  
-                                        <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center'}} onPress={this.onClick}>
-                                            <Text style={{fontSize:15, color: '#000000'}} >Xoá</Text>
-                                        </TouchableOpacity>  
-                                    </View>
-                                </View>
+                                {this.state.profile.map( (item) =>{
+                                    return (
+                                        <View style={styles.profile} key={item.name}>
+                                            <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>
+                                                <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 5}}>{item.name} ({item.job})</Text>
+                                                <Text style={{fontSize: 15, width: '100%'}}>Giới tính: {item.sex}</Text>
+                                                <Text style={{fontSize: 15, width: '100%'}}>Ngày sinh: {item.birthday}</Text>
+                                                <Text style={{fontSize: 15, width: '100%'}}>CMND: {item.cmnd}</Text>
+                                                <Text style={{fontSize: 15, width: '100%'}}>Hộ khẩu thường trú: {item.hktt}</Text>
+                                            </View>
+                                            <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
+                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.5}} onPress={this.onClickUpdateProfile}>
+                                                    <Text style={{fontSize:15, color: '#000000'}} >Sửa</Text>
+                                                </TouchableOpacity>  
+                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center'}} onPress={this.onClick}>
+                                                    <Text style={{fontSize:15, color: '#000000'}} >Xoá</Text>
+                                                </TouchableOpacity>  
+                                            </View>
+                                        </View>
+                                    )
+                                })}                               
+                                
                             </View>  
                         </ScrollView>  
                     </View>  

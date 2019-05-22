@@ -52,15 +52,15 @@ export default class RoomDetail extends Component {
                         </View>
                         <View style={styles.viewButton}>
                             <TouchableOpacity style={styles.button} onPress={this.onClick}>
-                                <Text style={{fontSize:20, color: '#FFFFFF'}} >CẬP NHẬP</Text>
+                                <Text style={{fontSize:20, color: '#FFFFFF'}} >Cập Nhập</Text>
                             </TouchableOpacity>  
                         </View>
                     </View>   
                     <View style={{flex: 3, width: '80%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#008080'}}>
                         <Text style={{flex: 1, color: '#000', fontSize: 20, marginTop: 10, fontWeight: 'bold'}}>Số Điện-Nước: 4/2019</Text>
                         <View style={{flex: 1, flexDirection: 'row', width: '100%', height: '50%', justifyContent : 'center'}}>
-                            <Text style={{ color: '#000', fontSize: 15, width: '40%'}}>Số Điện: 150 (kW)</Text>
-                            <Text style={{ color: '#000', fontSize: 15, width: '40%', marginLeft: '10%'}}>Số Nước: 200 (Khối)</Text>
+                            <Text style={{ color: '#000', fontSize: 15, width: '50%'}}>Số Điện: 150 (kW)</Text>
+                            <Text style={{ color: '#000', fontSize: 15, width: '50%', textAlign: 'right'}}>Số Nước: 200 (Khối)</Text>
                         </View>
                     </View> 
                 </View>  
