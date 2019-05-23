@@ -23,8 +23,7 @@ export default class ProfileScreen extends Component {
                     hktt: '131 Bùi Đình Túy, Bình Thạnh, Tp.HCM'
                 },
             ],
-        }
-        
+        }        
     }
 
     static navigationOptions = {

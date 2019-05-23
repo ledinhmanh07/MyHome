@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 
-export default class RoomDetail extends Component {
-    
-    static navigationOptions = {
-        title: 'Nhập Điện-Nước',
-        headerStyle: {
-            backgroundColor: '#3B5998',   
-          },
-          headerTintColor: '#ffffff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            alignSelf: 'center',
-            textAlign:"center", 
-            flex:1 
-          },
-    };
+export default class RoomDetail extends Component {  
 
     onClick = () => {
         this.props.navigation.navigate('CreatePinScreen')
@@ -25,9 +11,8 @@ export default class RoomDetail extends Component {
         return (                        
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
                 <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', paddingTop: '5%'}} >       
-                    <View style={{flex: 3, width: '60%', justifyContent : 'center', alignItems: 'center'}}>
-                        <Image source={require('@assets/images/logo.png')} style={{height: '40%', resizeMode: 'contain'}}/>                 
-                        <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: '5%'}}>PHÒNG: 411</Text>
+                    <View style={{flex: 1, width: '60%', justifyContent : 'center', alignItems: 'center'}}>              
+                        <Text style={{fontSize: 25, fontWeight: 'bold', marginTop: '5%'}}>PHÒNG: 411</Text>
                     </View>   
                     <View style={styles.form}>
                         <Text style={{flex: 1, color: '#000', fontSize: 20, marginTop: 15, fontWeight: 'bold'}}>Số Điện-Nước: 5/2019</Text>

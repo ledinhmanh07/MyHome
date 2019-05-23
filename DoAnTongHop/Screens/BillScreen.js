@@ -18,10 +18,10 @@ export default class HomeScreen extends Component {
     };
 
     onClickEnterBill = () => {
-        this.props.navigation.navigate('EnterBillScreen')
+        this.props.navigation.navigate('TabBillScreen')
     }
     onClickHistoryBill = () => {
-        this.props.navigation.navigate('CurrentBillScreen')
+        this.props.navigation.navigate('BillHistoryScreen')
     }
 
     render() {
