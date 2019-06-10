@@ -75,7 +75,8 @@ CREATE TABLE dv_phong_su_dung (
 );
 
 CREATE TABLE tai_khoan_user (
-	id_phong INT(10),
+	id_user INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_phong INT(10) NOT NULL UNIQUE,
     ten_dn NVARCHAR(20) NOT NULL UNIQUE,
     pass NVARCHAR(20),
 	FOREIGN KEY (id_phong) REFERENCES phong(id_phong)
@@ -182,8 +183,8 @@ VALUE ((SELECT id_phong FROM phong WHERE ten_phong = '301'), true, false, true);
 ------------------------------------------------------------
 -- Thêm dữ liệu 'Tài Khoản Người Dùng'
 
-INSERT INTO tai_khoan_user ( id_phong, ten_dn, pass )
-VALUE ((SELECT id_phong FROM phong WHERE ten_phong = '301'), 'dinhmanh', '123456');
+INSERT INTO tai_khoan_user ( id_user, id_phong, ten_dn, pass )
+VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), 'dinhmanh', '123456');
 
 
 ------------------------------------------------------------

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, ScrollView , Alert} from 'react-native'
+import axios from 'axios'
 
 export default class ProfileScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profile : ''
+            profile : []
         }        
     }
 
@@ -24,7 +25,7 @@ export default class ProfileScreen extends Component {
     };
 
     onClickUpdateProfile = () => {
-        this.props.navigation.navigate('UpdateProfileScreen')
+        this.props.navigation.navigate('UpdateProfileScreen', id = 2)
     }
     onClickCreateProfile = () => {
         this.props.navigation.navigate('CreateProfileScreen')
@@ -70,44 +71,39 @@ export default class ProfileScreen extends Component {
             </ImageBackground>
         )
     }
-}
 
-componentDidMount = () => {
-    this.fetchProfile();
-}
-
-//parameters "wallet" is value to show money
-fetchProfile = async() => {
-
-    let headers = {
-        'Content-Type': 'application/json',
-        // 'Authorization': 'JWT ...' 
+    componentDidMount = () => {
+        this.fetchProfile();
     }
     
-    let data = {
-        "sessionToken": "MOBILE_SYSTEM_AGENT",
-        "key": "TRANSACTION",
-        "externalTransNo": "EXT123456",
-        "customerToken": customerToken
+    fetchProfile = async() => {
+    
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...' 
+        }
+        
+        let data = {
+            "idPhong": global.idPhong
+        }
+    
+        await axios.post(
+            'http://172.17.0.18:3000/api/getKhachTro', {data},{ headers }
+        )
+        .then(response => {
+            let profile = response.data
+            if(profile.length != 0){
+                this.setState ({
+                    profile : profile
+                })
+                console.log(this.state.profile);
+            }        
+        })
+        .catch(error => {
+                console.log(error);
+            }
+        )
     }
-
-    await axios.get(
-        'http://172.17.0.124:3000/api/getKhachTro', data, { headers }
-    )
-    .then(response => {
-        let profile = response.data
-        if(profile !== null){
-            this.state = {
-                profile : JSON.stringify(profile)
-            }  
-        }
-        console.log(JSON.stringify(profile));
-    })
-    .catch(error => {
-            Alert.alert('', en.UNKNOWN_ERROR);
-            console.log(error);
-        }
-    )
 }
 
 const styles = StyleSheet.create({       
