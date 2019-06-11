@@ -6,7 +6,8 @@ export default class ProfileScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profile : []
+            profile : [],
+            id : 0
         }        
     }
 
@@ -24,17 +25,63 @@ export default class ProfileScreen extends Component {
           },
     };
 
-    onClickUpdateProfile = () => {
-        this.props.navigation.navigate('UpdateProfileScreen', id = 2)
+    onClickUpdateProfile = (id) => {
+        this.props.navigation.navigate('UpdateProfileScreen', {id : id})
     }
+
     onClickCreateProfile = () => {
         this.props.navigation.navigate('CreateProfileScreen')
-    }    
+    }   
+
+    onClickDeleteProfile = (id) => {
+        console.log(id)
+        this.state.id = id
+        Alert.alert(
+            'Cập nhập thông tin',
+            'Bạn có muốn xóa thông tin này,...???',
+            [
+              {text: 'Xóa', onPress: () => this.deleteProfile()},              
+              {text: 'Hủy', onPress: () => console.log('Hủy xóa thông tin')},
+            ],
+            {cancelable: false},
+          );
+    }
+
+    deleteProfile = async() => {
+
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...' 
+        }
+        
+        let data = {
+            "id": this.state.id    
+        }
+    
+        await axios.post('http://172.17.0.18:3000/api/deleteProfile', {data},{headers})
+        .then(response => {
+            let result = response.data
+            console.log(result);
+            if(result){
+                Alert.alert('Xóa dữ liệu thành công!!!')
+                this.fetchProfile() 
+            }
+            else
+            {
+                Alert.alert('Xóa dữ liệu không thành công!!!')
+            }                    
+        })
+        .catch(error => {
+                console.log(error);
+            }
+        )
+    }
+
     render() {
         return (
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
                 <View style={{flex: 1, width: '100%', height: '100%'}}>
-                    <View style={{flex: 4, width: '100%', height: '100%'}}>
+                    <View style={{flex: 6, width: '100%', height: '100%'}}>
                         <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
                             <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
                                 {this.state.profile.map( (item) =>{
@@ -45,13 +92,13 @@ export default class ProfileScreen extends Component {
                                                 <Text style={{fontSize: 15, width: '100%'}}>Giới tính: {item.gioi_tinh}</Text>
                                                 <Text style={{fontSize: 15, width: '100%'}}>Ngày sinh: {item.ngay_sinh}</Text>
                                                 <Text style={{fontSize: 15, width: '100%'}}>CMND: {item.cmnd}</Text>
-                                                <Text style={{fontSize: 15, width: '100%'}}>Hộ khẩu thường trú: {item.hktt}</Text>
+                                                <Text style={{fontSize: 15, width: '100%'}}>HKTT: {item.hktt}</Text>
                                             </View>
                                             <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
-                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.5}} onPress={this.onClickUpdateProfile}>
+                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onClickUpdateProfile(item.id)}>
                                                     <Text style={{fontSize:15, color: '#000000'}} >Sửa</Text>
                                                 </TouchableOpacity>  
-                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center'}} onPress={this.onClick}>
+                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={() => this.onClickDeleteProfile(item.id)}>
                                                     <Text style={{fontSize:15, color: '#000000'}} >Xoá</Text>
                                                 </TouchableOpacity>  
                                             </View>
@@ -59,11 +106,11 @@ export default class ProfileScreen extends Component {
                                     )
                                 })}                               
                                 
-                            </View>  
+                            </View>     
                         </ScrollView>  
                     </View>  
                     <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
-                        <TouchableOpacity style={{ width: '20%', height: '40%', justifyContent : 'center', alignItems: 'center'}} onPress={this.onClickCreateProfile}>
+                        <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={this.onClickCreateProfile}>
                             <Image source={require('@assets/images/add_profile.png')} style={{height: '100%', width: '100%', resizeMode: 'contain', tintColor: '#00008B'}}/> 
                         </TouchableOpacity>
                     </View>

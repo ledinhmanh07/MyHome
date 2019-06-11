@@ -26,6 +26,17 @@ Router.post('/api/getKhachTro',(req,res)=>{
     },req.body.data.idPhong)
 })
 
+Router.post('/api/getKhachTro1',(req,res)=>{    
+    db.getKhachTro1((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result[0])
+    },req.body.data.id)
+})
+
 Router.post('/api/testTaiKhoan',(req,res)=>{    
     console.log(req.body)
     db.testTaiKhoan((result,err)=>{
@@ -36,6 +47,45 @@ Router.post('/api/testTaiKhoan',(req,res)=>{
         console.log(result)      
         res.json(result)
     },req.body.data)
+})
+
+Router.post('/api/updateProfile',(req,res)=>{
+    console.log(req.body)
+    db.updateProfile((result,err)=>{
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
+            return;
+        }
+        console.log(result)      
+        res.json(true)
+    },req.body.data)
+})
+
+Router.post('/api/createProfile',(req,res)=>{
+    console.log(req.body)
+    db.createProfile((result,err)=>{
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
+            return;
+        }
+        console.log(result)      
+        res.json(true)
+    },req.body.data)
+})
+
+Router.post('/api/deleteProfile',(req,res)=>{
+    console.log(req.body)
+    db.deleteProfile((result,err)=>{
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
+            return;
+        }
+        console.log(result)      
+        res.json(true)
+    },req.body.data.id)
 })
 
 // Router.post('/api/signupUser',(req,res)=>{
@@ -65,4 +115,5 @@ Router.post('/api/testTaiKhoan',(req,res)=>{
 //         res.json(Respone)
 //     },param)
 // })
+
 module.exports = Router

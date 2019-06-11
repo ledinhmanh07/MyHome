@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
-import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput , Alert} from 'react-native'
 import * as Common from '@constans/Common'
+import axios from 'axios'
 
 export default class CreateProfileScreen extends Component {
     
+    constructor(props) {
+        super(props);
+        this.state = {
+            "id_phong": global.idPhong,
+            "cmnd": "",
+            "gioi_tinh": "",
+            "hktt": "",
+            "ho_ten": "",      
+            "nam_sinh": "",
+            "nghe_nghiep": "",            
+        }        
+    }
+
     static navigationOptions = {
         title: 'Thêm Thông Tin',
         headerStyle: {
@@ -18,8 +32,60 @@ export default class CreateProfileScreen extends Component {
           },
     };
 
-    onClick = () => {
-        this.props.navigation.navigate('')
+    onCreateProfileClick = () => {
+        Alert.alert(
+            'Cập nhập thông tin',
+            'Bạn có muốn cập nhập thông tin này,...???',
+            [
+              {text: 'Thêm', onPress: () => {
+                if(this.state.ho_ten.length == 0 || this.state.cmnd.length == 0 || this.state.gioi_tinh.length == 0 || 
+                    this.state.hktt.length == 0 || this.state.nam_sinh.length == 0 || this.state.nghe_nghiep.length == 0){
+                        Alert.alert("Bạn phải nhập đầy đủ thông tin,...!!!")
+                    }
+                    else{
+                        this.createProfile()
+                    }    
+              }},              
+              {text: 'Hủy', onPress: () => console.log('Hủy thêm thông tin')},
+            ],
+            {cancelable: false},
+        )            
+    }
+
+    createProfile = async() => {
+
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...' 
+        }
+        
+        let data = {
+            "id_phong": this.state.id_phong,
+            "cmnd": this.state.cmnd,
+            "gioi_tinh": this.state.gioi_tinh,
+            "hktt": this.state.hktt,
+            "ho_ten": this.state.ho_ten,      
+            "nam_sinh": this.state.nam_sinh,
+            "nghe_nghiep": this.state.nghe_nghiep,    
+        }
+    
+        await axios.post('http://172.17.0.18:3000/api/createProfile', {data},{headers})
+        .then(response => {
+            let result = response.data
+            console.log(result);
+            if(result){
+                Alert.alert('Thêm dữ liệu thành công!!!')
+                this.props.navigation.goBack()   
+            }
+            else
+            {
+                Alert.alert('Thêm dữ liệu không thành công!!!')
+            }        
+        })
+        .catch(error => {
+                console.log(error);
+            }
+        )
     }
 
     render() {
@@ -29,13 +95,13 @@ export default class CreateProfileScreen extends Component {
                       
                     <View style={styles.form}>
                         <View style={{flex:6, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
-                            <View style={styles.viewInput}>
-                                <Text style={styles.label}>Họ và tên</Text>
+                        <View style={styles.viewInput}>
+                                <Text style={styles.label}>Họ và tên:</Text>
                                 <TextInput                            
                                     placeholder='Họ và tên,...'
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ ho_ten : text })}
                                 />
                             </View>                            
                             <View style={styles.viewInput}>
@@ -44,7 +110,7 @@ export default class CreateProfileScreen extends Component {
                                     placeholder='Giới tính,...'
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ gioi_tinh : text })}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
@@ -53,7 +119,7 @@ export default class CreateProfileScreen extends Component {
                                     placeholder='Nghề nghiệp,...'
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ nghe_nghiep : text })}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
@@ -62,7 +128,7 @@ export default class CreateProfileScreen extends Component {
                                     placeholder='Ngày sinh,...'
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({nam_sinh : text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
@@ -71,7 +137,7 @@ export default class CreateProfileScreen extends Component {
                                     placeholder='Số CMND,...'
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ cmnd: text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
@@ -80,12 +146,12 @@ export default class CreateProfileScreen extends Component {
                                     placeholder='Hộ khẩu thường trú,...'
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ hktt : text})}
                                 />  
                             </View>
                         </View>
                         <View style={styles.viewButton}>
-                            <TouchableOpacity style={styles.button} onPress={this.onClick}>
+                            <TouchableOpacity style={styles.button} onPress={this.onCreateProfileClick}>
                                 <Text style={{fontSize:Common.titleSize, color: '#fff'}} >Lưu</Text>
                             </TouchableOpacity>  
                         </View>

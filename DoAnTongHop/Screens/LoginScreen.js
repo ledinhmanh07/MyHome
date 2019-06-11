@@ -18,8 +18,8 @@ export default class LoginScreen extends Component {
         header: null
     };
 
-    onClickLogIn = async () => {
-        this.testUserID()   
+    onClickLogIn = () => {
+        this.testUserID()
     }
     
     testUserID = async() => {
@@ -53,8 +53,7 @@ export default class LoginScreen extends Component {
     }
 
     onClick = () => {
-        Alert.alert('Thông báo', 'UserName = '+this.state.userName+'\nPassword: '+this.state.pass)
-        this.props.navigation.replace('HomeScreen')
+        Alert.alert('Thông báo', 'Vui lòng liên hệ với ADMIN để cấp lại mật khẩu,...!!!')
     }
 
     render() {

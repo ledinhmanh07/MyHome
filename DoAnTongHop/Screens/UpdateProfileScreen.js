@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
-import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
+import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput , Alert} from 'react-native'
 import * as Common from '@constans/Common'
+import axios from 'axios'
 
 export default class UpdateProfileScreen extends Component {
     
+    constructor(props) {
+        super(props);
+        this.state = {
+            "id": this.props.navigation.state.params.id,
+            "cmnd": "",
+            "gioi_tinh": "",
+            "hktt": "",
+            "ho_ten": "",      
+            "nam_sinh": "",
+            "nghe_nghiep": "",            
+        }        
+    }
+
     static navigationOptions = {
         title: 'Cập Nhập Thông Tin',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: '#3B5998',
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {
@@ -18,8 +32,53 @@ export default class UpdateProfileScreen extends Component {
           },
     };
 
-    onClick = () => {
-        this.props.navigation.navigate('')
+    onSaveClick = () => {
+        console.log(this.state)
+        Alert.alert(
+            'Cập nhập thông tin',
+            'Bạn có muốn cập nhập thông tin này,...???',
+            [
+              {text: 'Cập nhập', onPress: () => this.updateProfile()},              
+              {text: 'Hủy', onPress: () => console.log('Hủy cập nhập')},
+            ],
+            {cancelable: false},
+          );
+    }
+
+    updateProfile = async() => {
+
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...' 
+        }
+        
+        let data = {
+            "id": this.state.id,
+            "cmnd": this.state.cmnd,
+            "gioi_tinh": this.state.gioi_tinh,
+            "hktt": this.state.hktt,
+            "ho_ten": this.state.ho_ten,      
+            "nam_sinh": this.state.nam_sinh,
+            "nghe_nghiep": this.state.nghe_nghiep,    
+        }
+    
+        await axios.post('http://172.17.0.18:3000/api/updateProfile', {data},{headers})
+        .then(response => {
+            let result = response.data
+            console.log(result);
+            if(result){
+                Alert.alert('Cập nhập dữ liệu thành công!!!')
+                this.props.navigation.goBack()   
+            }
+            else
+            {
+                Alert.alert('Cập nhập dữ liệu không thành công!!!')
+            }                    
+        })
+        .catch(error => {
+                console.log(error);
+            }
+        )
     }
 
     render() {
@@ -30,62 +89,68 @@ export default class UpdateProfileScreen extends Component {
                     <View style={styles.form}>
                         <View style={{flex:6, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
                             <View style={styles.viewInput}>
-                                <Text style={styles.label}>Họ và tên</Text>
+                                <Text style={styles.label}>Họ và tên:</Text>
                                 <TextInput                            
                                     placeholder='Họ và tên,...'
+                                    value={this.state.ho_ten}
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ ho_ten : text })}
                                 />
                             </View>                            
                             <View style={styles.viewInput}>
                                 <Text style={styles.label}>Giới tính</Text>
                                 <TextInput                            
                                     placeholder='Giới tính,...'
+                                    value={this.state.gioi_tinh}
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ gioi_tinh : text })}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
                                 <Text style={styles.label}>Nghề nghiệp</Text>
                                 <TextInput                            
                                     placeholder='Nghề nghiệp,...'
+                                    value={this.state.nghe_nghiep}
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ nghe_nghiep : text })}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
                                 <Text style={styles.label}>Ngày sinh</Text>
                                 <TextInput                            
                                     placeholder='Ngày sinh,...'
+                                    value={this.state.nam_sinh}
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({nam_sinh : text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
                                 <Text style={styles.label}>Số CMND</Text>
                                 <TextInput                            
                                     placeholder='Số CMND,...'
+                                    value={this.state.cmnd}
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ cmnd: text})}
                                 />  
                             </View>
                             <View style={styles.viewInput}>
                                 <Text style={styles.label}>HKTT</Text>
                                 <TextInput                            
                                     placeholder='Hộ khẩu thường trú,...'
+                                    value={this.state.hktt}
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
-                                    onChangeText={(text) => this.setState({text})}
+                                    onChangeText={(text) => this.setState({ hktt : text})}
                                 />  
                             </View>
                         </View>
                         <View style={styles.viewButton}>
-                            <TouchableOpacity style={styles.button} onPress={this.onClick}>
+                            <TouchableOpacity style={styles.button} onPress={this.onSaveClick}>
                                 <Text style={{fontSize:Common.titleSize, color: '#fff'}} >Lưu</Text>
                             </TouchableOpacity>  
                         </View>
@@ -93,6 +158,45 @@ export default class UpdateProfileScreen extends Component {
                     
                 </View>  
             </ImageBackground>
+        )
+    }
+    componentDidMount = () => {
+        this.fetchProfile();
+    }
+    
+    fetchProfile = async() => {
+    
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...' 
+        }
+        
+        let data = {
+            "id" : this.state.id            
+        }
+
+        console.log(data);
+    
+        await axios.post(
+            'http://172.17.0.18:3000/api/getKhachTro1', {data},{ headers }
+        )
+        .then(response => {
+            let profile = response.data
+            if(profile != null){
+                this.setState ({
+                    "cmnd": profile.cmnd,
+                    "gioi_tinh": profile.gioi_tinh,
+                    "hktt": profile.hktt,
+                    "ho_ten": profile.ho_ten,      
+                    "nam_sinh": profile.nam_sinh,
+                    "nghe_nghiep": profile.nghe_nghiep   
+                })
+                console.log(this.state.profile);
+            }        
+        })
+        .catch(error => {
+                console.log(error);
+            }
         )
     }
 }
