@@ -54,17 +54,29 @@ CREATE TABLE ql_xe (
 CREATE TABLE hoa_don (
 	id_hoa_don INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_phong INT(10),
-    ngay_lap NVARCHAR(10),
+    id_user INT(10),
+    hoa_don_thang NVARCHAR(14),
+    ngay_lap NVARCHAR(14),
     so_nuoc_cu INT,
     so_nuoc_moi INT,
+    gia_nuoc DOUBLE,
     so_dien_cu INT,
     so_dien_moi INT,
-    internet BOOLEAN,
-    truyen_hinh_cap BOOLEAN,
-    ve_sinh BOOLEAN,
+    gia_dien DOUBLE,
+    so_xe INT,
+    gia_xe DOUBLE,
+    internet DOUBLE,
+    truyen_hinh_cap DOUBLE,
+    ve_sinh DOUBLE,
     khac DOUBLE,
-	FOREIGN KEY (id_phong) REFERENCES phong(id_phong)
+    gia_phong DOUBLE,
+    tong_tien DOUBLE,
+    tinh_trang BOOLEAN,
+	FOREIGN KEY (id_phong) REFERENCES phong(id_phong),
+    FOREIGN KEY (id_user) REFERENCES tai_khoan_user(id_user)
 );
+
+-- DROP TABLE hoa_don;
 
 CREATE TABLE dv_phong_su_dung (	
     id_phong INT(10),
@@ -186,6 +198,16 @@ VALUE ((SELECT id_phong FROM phong WHERE ten_phong = '301'), true, false, true);
 INSERT INTO tai_khoan_user ( id_user, id_phong, ten_dn, pass )
 VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), 'dinhmanh', '123456');
 
+
+------------------------------------------------------------
+-- Thêm dữ liệu 'Hóa Đơn'
+-- SELECT CURDATE() <lấy ngày hiện tại> 
+
+INSERT INTO hoa_don ( id_hoa_don, id_phong, id_user, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, gia_nuoc, so_dien_cu, so_dien_moi, gia_dien, so_xe, gia_xe, internet, truyen_hinh_cap, ve_sinh, khac, gia_phong, tong_tien, tinh_trang )
+VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_user FROM tai_khoan_user where id_phong = (SELECT id_phong FROM phong WHERE ten_phong = '301')), '05/2019', '25/05/2019', 120, 150, 4000, 120, 133, 15000, 3, 150000, 120000, 0, 40000, null, 3800000, 4800000, false);
+
+INSERT INTO hoa_don ( id_hoa_don, id_phong, id_user, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, gia_nuoc, so_dien_cu, so_dien_moi, gia_dien, so_xe, gia_xe, internet, truyen_hinh_cap, ve_sinh, khac, gia_phong, tong_tien, tinh_trang )
+VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_user FROM tai_khoan_user where id_phong = (SELECT id_phong FROM phong WHERE ten_phong = '301')), '06/2019', '25/05/2019', 150, 182, 4000, 132, 140, 15000, 3, 150000, 120000, 0, 40000, null, 3800000, 4850000, false);
 
 ------------------------------------------------------------
 -- Thêm dữ liệu 'Tài Khoản ADMIN'

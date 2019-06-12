@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { View, ImageBackground ,Text, StyleSheet } from 'react-native'
+import { View, ImageBackground ,Text, StyleSheet, ScrollView } from 'react-native'
 import * as Common from '@constans/Common'
 
 export default class CurrentBillScreen extends Component {
     constructor(props) {
         super(props);
-        
-        
     }
     bill = {
         id: '12',
@@ -37,14 +35,15 @@ export default class CurrentBillScreen extends Component {
     render() {
         return (                        
             <ImageBackground source={require('@assets/images/background.png')} style={{flex: 1, width: '100%', height: '100%'}}>
-                <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', marginVertical: 25}}>
+                {/* <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', marginVertical: 25}}> */}
+                <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center', width: '100%'}} > 
                     <View style={styles.form}>
-                        <View  style={{flex: 2, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
+                        <View  style={{flex: 2, justifyContent : 'center', alignItems: 'center'}}>
                             <Text style={{fontWeight: 'bold', fontSize: Common.labelSize}}>HÓA ĐƠN: {this.bill.date}</Text>                                
                         </View> 
                         <View style={[styles.column, {flex: 4}]}>
-                            <View  style={{flex: 1, width: '100%', height: '100%', justifyContent: 'center'}}>
-                                <Text style={styles.label}>1. Nước</Text>
+                            <View  style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center'}}>
+                                <Text style={styles.labelTop}>1. Nước</Text>
                             </View>
                             <View  style={[styles.item]}>
                                 <Text style={styles.value}>Số cũ: {this.bill.soNuocCu}</Text>
@@ -57,7 +56,7 @@ export default class CurrentBillScreen extends Component {
                         </View> 
                         <View style={[styles.column, {flex: 4}]}>
                             <View  style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center'}}>
-                                <Text style={styles.label}>2. Điện</Text>
+                                <Text style={styles.labelTop}>2. Điện</Text>
                             </View>
                             <View  style={[styles.item]}>
                                 <Text style={styles.value}>Số cũ: {this.bill.soDienCu}</Text>
@@ -70,7 +69,7 @@ export default class CurrentBillScreen extends Component {
                         </View> 
                         <View style={[styles.column, {flex: 3}]}>
                             <View  style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center'}}>
-                                <Text style={styles.label}>3. Quản lý xe</Text>
+                                <Text style={styles.labelTop}>3. Quản lý xe</Text>
                             </View>
                             <View  style={[styles.item]}>
                                 <Text style={styles.value}>Số lượng: {this.bill.soXe}</Text>
@@ -122,8 +121,9 @@ export default class CurrentBillScreen extends Component {
                         <View  style={{flex: 2, width: '100%', height: '100%', justifyContent : 'center'}}>
                             <Text style={{fontWeight: 'bold', fontSize: Common.labelSize}}>Tổng cộng: {this.bill.tongTien}</Text>                                
                         </View>                      
-                    </View>  
-                </View>
+                    </View>
+                    </ScrollView>
+                {/* </View> */}
             </ImageBackground>
         )
     }
@@ -131,14 +131,13 @@ export default class CurrentBillScreen extends Component {
 
 const styles = StyleSheet.create({
     form: {
-        flex: 10, 
         opacity:0.8, 
         backgroundColor: '#ffffff',      
         paddingHorizontal: '5%',   
-        paddingTop: 5,
-        paddingBottom: 5,
+        marginVertical: 25,
         alignItems: 'center', 
         width: '90%', 
+        height: 600,
         borderRadius: 20,  
         shadowColor: '#000000', 
         shadowOffset: { 
@@ -164,6 +163,10 @@ const styles = StyleSheet.create({
     },
     value: {
         flex: 1, 
+        fontSize: Common.textSize
+    },
+    labelTop: {
+        fontWeight: 'bold', 
         fontSize: Common.textSize
     },
     label: {

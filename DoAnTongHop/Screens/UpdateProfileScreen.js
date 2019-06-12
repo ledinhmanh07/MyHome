@@ -191,7 +191,7 @@ export default class UpdateProfileScreen extends Component {
                     "nam_sinh": profile.nam_sinh,
                     "nghe_nghiep": profile.nghe_nghiep   
                 })
-                console.log(this.state.profile);
+                console.log(profile);
             }        
         })
         .catch(error => {

@@ -39,7 +39,8 @@ export default class LoginScreen extends Component {
             console.log(userID);
             if(userID.length!=0){
                 global.idPhong = userID[0].id_phong
-                console.log('ID phòng là: '+global.idPhong)
+                global.idUser = userID[0].id_user
+                console.log('ID phòng là: '+global.idPhong+' - ID User: ' + global.idUser)
                 this.props.navigation.replace('HomeScreen')      
             }      
             else{
@@ -53,6 +54,7 @@ export default class LoginScreen extends Component {
     }
 
     onClick = () => {
+        this.props.navigation.replace('SupportScreen')  
         Alert.alert('Thông báo', 'Vui lòng liên hệ với ADMIN để cấp lại mật khẩu,...!!!')
     }
 

@@ -37,6 +37,17 @@ Router.post('/api/getKhachTro1',(req,res)=>{
     },req.body.data.id)
 })
 
+Router.post('/api/getHoaDon',(req,res)=>{    
+    db.getHoaDon((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result)
+    },req.body.data.idPhong)
+})
+
 Router.post('/api/testTaiKhoan',(req,res)=>{    
     console.log(req.body)
     db.testTaiKhoan((result,err)=>{

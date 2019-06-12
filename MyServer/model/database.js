@@ -45,6 +45,16 @@ function getKhachTro1(callback, params){
     });
 }
 
+function getHoaDon(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT * FROM hoa_don where id_phong =?', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
 function testTaiKhoan(callback, params){
     console.log('params : ' + params)
     let query = `SELECT * FROM tai_khoan_user where ten_dn=` + `'` + params.userName + `'` + ` and pass = `+ `'` + params.pass+ `'` 
@@ -120,5 +130,6 @@ module.exports = {
     testTaiKhoan:testTaiKhoan,
     updateProfile:updateProfile,
     createProfile:createProfile,
-    deleteProfile:deleteProfile
+    deleteProfile:deleteProfile,
+    getHoaDon:getHoaDon
 }
