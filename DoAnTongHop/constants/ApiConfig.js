@@ -1,0 +1,1 @@
+export const LINK = 'http://172.17.0.18:3000/api/'
