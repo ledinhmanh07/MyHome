@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput , Alert} from 'react-native'
-import * as Common from '@constans/Common'
+import * as Common from '@constants/Common'
+import * as ApiConfig from '@constants/ApiConfig'
 import axios from 'axios'
 
 export default class UpdateProfileScreen extends Component {
@@ -62,7 +63,7 @@ export default class UpdateProfileScreen extends Component {
             "nghe_nghiep": this.state.nghe_nghiep,    
         }
     
-        await axios.post('http://172.17.0.18:3000/api/updateProfile', {data},{headers})
+        await axios.post( ApiConfig.LINK + 'updateProfile', {data},{headers})
         .then(response => {
             let result = response.data
             console.log(result);
@@ -178,7 +179,7 @@ export default class UpdateProfileScreen extends Component {
         console.log(data);
     
         await axios.post(
-            'http://172.17.0.18:3000/api/getKhachTro1', {data},{ headers }
+             ApiConfig.LINK + 'getKhachTro1', {data},{ headers }
         )
         .then(response => {
             let profile = response.data

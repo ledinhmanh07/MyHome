@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextInput , Alert} from 'react-native'
-import * as Common from '@constans/Common'
+import * as Common from '@constants/Common'
 import axios from 'axios'
+import * as ApiConfig from '@constants/ApiConfig'
 
 export default class CreateProfileScreen extends Component {
     
@@ -69,7 +70,7 @@ export default class CreateProfileScreen extends Component {
             "nghe_nghiep": this.state.nghe_nghiep,    
         }
     
-        await axios.post('http://172.17.0.18:3000/api/createProfile', {data},{headers})
+        await axios.post( ApiConfig.LINK + 'createProfile', {data},{headers})
         .then(response => {
             let result = response.data
             console.log(result);

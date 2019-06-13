@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, TextInput, ImageBackground ,Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native'
 import axios from 'axios'
+import * as Common from '@constants/Common'
+import * as ApiConfig from '@constants/ApiConfig'
 
 export default class LoginScreen extends Component {
     
@@ -33,7 +35,7 @@ export default class LoginScreen extends Component {
             "pass": this.state.pass
         }
     
-        await axios.post('http://172.17.0.18:3000/api/testTaiKhoan', {data},{headers})
+        await axios.post( ApiConfig.LINK + 'testTaiKhoan', {data},{headers})
         .then(response => {
             let userID = response.data
             console.log(userID);
@@ -54,8 +56,8 @@ export default class LoginScreen extends Component {
     }
 
     onClick = () => {
-        this.props.navigation.replace('SupportScreen')  
-        Alert.alert('Thông báo', 'Vui lòng liên hệ với ADMIN để cấp lại mật khẩu,...!!!')
+        // this.props.navigation.replace('SupportScreen')  
+        Alert.alert('Thông báo', 'ApiConfig: '+ApiConfig.LINK+'testTaiKhoan')
     }
 
     render() {

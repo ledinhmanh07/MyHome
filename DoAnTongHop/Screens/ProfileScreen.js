@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, ScrollView , Alert} from 'react-native'
 import axios from 'axios'
+import * as ApiConfig from '@constants/ApiConfig'
 
 export default class ProfileScreen extends Component {
     constructor(props) {
@@ -58,7 +59,7 @@ export default class ProfileScreen extends Component {
             "id": this.state.id    
         }
     
-        await axios.post('http://172.17.0.18:3000/api/deleteProfile', {data},{headers})
+        await axios.post( ApiConfig.LINK + 'deleteProfile', {data},{headers})
         .then(response => {
             let result = response.data
             console.log(result);
@@ -135,7 +136,7 @@ export default class ProfileScreen extends Component {
         }
     
         await axios.post(
-            'http://172.17.0.18:3000/api/getKhachTro', {data},{ headers }
+             ApiConfig.LINK + 'getKhachTro', {data},{ headers }
         )
         .then(response => {
             let profile = response.data

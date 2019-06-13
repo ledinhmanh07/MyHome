@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, ImageBackground ,Text, StyleSheet, ScrollView } from 'react-native'
-import * as Common from '@constans/Common'
+import * as Common from '@constants/Common'
 import axios from 'axios'
+import * as ApiConfig from '@constants/ApiConfig'
 
 export default class BillHistoryScreen extends Component {
   constructor(props) {
@@ -142,7 +143,7 @@ export default class BillHistoryScreen extends Component {
     }
 
     await axios.post(
-        'http://172.17.0.18:3000/api/getHoaDon', {data},{ headers }
+         ApiConfig.LINK + 'getHoaDon', {data},{ headers }
     )
     .then(response => {
         let bill = response.data
