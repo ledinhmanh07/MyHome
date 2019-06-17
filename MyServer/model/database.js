@@ -55,6 +55,26 @@ function getHoaDon(callback, params){
     });
 }
 
+function getRoomDetail(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT ten_phong, ten_loai, gia_phong, mo_ta, ghi_chu FROM phong INNER JOIN loai_phong ON phong.id_loai = loai_phong.id_loai where id_phong =?', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results[0])
+    });
+}
+
+function getBangGia(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT * FROM bang_gia', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
 function testTaiKhoan(callback, params){
     console.log('params : ' + params)
     let query = `SELECT * FROM tai_khoan_user where ten_dn=` + `'` + params.userName + `'` + ` and pass = `+ `'` + params.pass+ `'` 
@@ -131,5 +151,7 @@ module.exports = {
     updateProfile:updateProfile,
     createProfile:createProfile,
     deleteProfile:deleteProfile,
-    getHoaDon:getHoaDon
+    getHoaDon:getHoaDon,
+    getRoomDetail:getRoomDetail,
+    getBangGia:getBangGia
 }

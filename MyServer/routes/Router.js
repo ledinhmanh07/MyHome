@@ -99,6 +99,28 @@ Router.post('/api/deleteProfile',(req,res)=>{
     },req.body.data.id)
 })
 
+Router.post('/api/getRoomDetail',(req,res)=>{    
+    db.getRoomDetail((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result)
+    },req.body.data.idPhong)
+})
+
+Router.post('/api/getBangGia',(req,res)=>{    
+    db.getBangGia((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result)
+    },[])
+})
+
 // Router.post('/api/signupUser',(req,res)=>{
 //     var req = req.body
 //     var param={
