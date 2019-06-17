@@ -48,6 +48,28 @@ Router.post('/api/getHoaDon',(req,res)=>{
     },req.body.data.idPhong)
 })
 
+Router.post('/api/getHoaDonMoi',(req,res)=>{    
+    db.getHoaDonMoi((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result[0])
+    },req.body.data.idPhong)
+})
+
+Router.post('/api/getDienNuoc',(req,res)=>{    
+    db.getDienNuoc((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result[0])
+    },req.body.data.idPhong)
+})
+
 Router.post('/api/testTaiKhoan',(req,res)=>{    
     console.log(req.body)
     db.testTaiKhoan((result,err)=>{

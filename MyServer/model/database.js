@@ -28,6 +28,7 @@ function getKhachTro(callback, params){
     connection.query('SELECT * FROM khach_tro where id_phong =?', params, function (error, results, fields) {
         if (error){
             callback(null,error)
+        callback(results)
         }
         callback(results)
     });
@@ -47,7 +48,27 @@ function getKhachTro1(callback, params){
 
 function getHoaDon(callback, params){
     console.log('params : ' + params)
-    connection.query('SELECT * FROM hoa_don where id_phong =?', params, function (error, results, fields) {
+    connection.query('SELECT * FROM hoa_don where id_phong =? order by id_hoa_don desc', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+function getHoaDonMoi(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT * FROM hoa_don where id_phong =? order by id_hoa_don desc limit 1', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+function getDienNuoc(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, so_dien_cu, so_dien_moi FROM hoa_don where id_phong =? order by id_hoa_don desc limit 1', params, function (error, results, fields) {
         if (error){
             callback(null,error)
         }
@@ -152,6 +173,8 @@ module.exports = {
     createProfile:createProfile,
     deleteProfile:deleteProfile,
     getHoaDon:getHoaDon,
+    getHoaDonMoi:getHoaDonMoi,
+    getDienNuoc:getDienNuoc,
     getRoomDetail:getRoomDetail,
     getBangGia:getBangGia
 }

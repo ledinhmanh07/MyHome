@@ -57,7 +57,7 @@ export default class RoomDetail extends Component {
                         <Text style={styles.text}>Giá phòng: {this.state.gia_phong} vnđ / 1 tháng</Text>
                         {this.state.bang_gia.map( (item) =>{
                                     return (
-                                        <Text style={styles.text} key = {item.id_gia}>{item.ten_gia}: {item.gia} ({item.don_vi})</Text>
+                                        <Text style={styles.text} key={item.id_gia}>{item.ten_gia}: {item.gia} ({item.don_vi})</Text>
                                     )
                                     })
                         }
