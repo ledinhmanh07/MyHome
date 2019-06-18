@@ -15,14 +15,7 @@ export default class RoomDetail extends Component {
             mo_ta : '',
             ghi_chu : '',                
             
-            bang_gia: [
-                {
-                    'dm': 'asd',
-                },
-                {
-                    'dm': 'asd',
-                },
-            ]
+            bang_gia: []
         }
     }
 

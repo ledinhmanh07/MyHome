@@ -143,32 +143,54 @@ Router.post('/api/getBangGia',(req,res)=>{
     },[])
 })
 
-// Router.post('/api/signupUser',(req,res)=>{
-//     var req = req.body
-//     var param={
-//         SDT:req.sdt,
-//         Pwd:req.pwd,
-//         Role:req.role,
-//         Ten:req.ten,
-//         Email:req.email,
-//         Tuoi:req.tuoi
-//     }
-//     console.log(req)
-//     db.registerUser((result,err) =>{
-//         if(err){
-//             res.json(err)
-//             return;
-//         }
-//         let Respone = {
-//             resultCode:0,
-//             sdt:param.SDT,
-//             role:param.Role,
-//             ten:param.Ten,
-//             email:param.Email,
-//             tuoi:param.Tuoi
-//         }
-//         res.json(Respone)
-//     },param)
-// })
+Router.post('/api/getMotorDetail',(req,res)=>{    
+    db.getMotorDetail((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result)
+    },req.body.data.idPhong)
+})
+
+Router.post('/api/updateMotor',(req,res)=>{
+    console.log(req.body)
+    db.updateMotor((result,err)=>{
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
+            return;
+        }
+        console.log(result)      
+        res.json(true)
+    },req.body.data)
+})
+
+Router.post('/api/createMotor',(req,res)=>{
+    console.log(req.body)
+    db.createMotor((result,err)=>{
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
+            return;
+        }
+        console.log(result)      
+        res.json(true)
+    },req.body.data)
+})
+
+Router.post('/api/deleteMotor',(req,res)=>{
+    console.log(req.body)
+    db.deleteMotor((result,err)=>{
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
+            return;
+        }
+        console.log(result)      
+        res.json(true)
+    },req.body.data.id_xe)
+})
 
 module.exports = Router

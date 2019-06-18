@@ -15,7 +15,7 @@ export default class HomeScreen extends Component {
         this.props.navigation.navigate('BillScreen')
     }
     onClickProfile = () => {
-        this.props.navigation.navigate('ProfileScreen')
+        this.props.navigation.navigate('TabProfileScreen')
     }
 
     render() {
@@ -38,7 +38,7 @@ export default class HomeScreen extends Component {
                             <View style={styles.viewButton}>
                                 <TouchableOpacity style={styles.button} onPress={this.onClickProfile}>
                                     <Image source={require('@assets/images/profile.png')} style={styles.icon}/>   
-                                    <Text style={styles.textBtn} >Thông Tin Cá Nhân</Text>
+                                    <Text style={styles.textBtn} >Thông Tin Khách Trọ</Text>
                                 </TouchableOpacity>
                             </View> 
                         </View> 

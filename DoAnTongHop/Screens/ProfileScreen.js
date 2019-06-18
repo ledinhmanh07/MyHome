@@ -155,34 +155,6 @@ export default class ProfileScreen extends Component {
 }
 
 const styles = StyleSheet.create({       
-    viewButton: {
-        alignItems: 'center', 
-        width:'50%', 
-        height: '50%'
-    },
-    button: { 
-        height: '80%', 
-        width: '80%', 
-        backgroundColor: '#FFFFFF', 
-        opacity:0.8, 
-        alignItems: 'center', 
-        justifyContent: 'center',  
-        borderRadius: 10,
-        elevation: 5,
-        borderWidth: 0.5,
-        borderColor: '#000'
-    },
-    icon: {
-        height: '50%', 
-        width: '50%', 
-        resizeMode: 'contain'
-    },
-    textBtn: {  
-        fontSize:20, 
-        color: '#000', 
-        textAlign: 'center', 
-        width: '80%'
-    },
     profile: {
         flex: 1,
         alignItems: 'center',

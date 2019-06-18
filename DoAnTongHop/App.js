@@ -12,8 +12,10 @@ import UpdateProfileScreen from '@screens/UpdateProfileScreen';
 import CreateProfileScreen from '@screens/CreateProfileScreen';
 import CurrentBillScreen from '@screens/CurrentBillScreen';
 import TabBillScreen from '@screens/TabBillScreen';
+import TabProfileScreen from '@screens/TabProfileScreen';
 import SupportScreen from '@screens/SupportScreen';
 import CarScreen from '@screens/CarScreen';
+import MotorDetailScreen from '@screens/MotorDetailScreen';
 
 
 const MainNavigator = createStackNavigator(
@@ -29,8 +31,10 @@ const MainNavigator = createStackNavigator(
     CreateProfileScreen: { screen: CreateProfileScreen }, 
     CurrentBillScreen: { screen: CurrentBillScreen },
     TabBillScreen: { screen: TabBillScreen },
+    TabProfileScreen: { screen: TabProfileScreen },
     SupportScreen: { screen: SupportScreen },
     CarScreen: { screen: CarScreen },
+    MotorDetailScreen: { screen: MotorDetailScreen },
   },
   {
     initialRouteName: "LoginScreen",

@@ -35,6 +35,7 @@ export default class RoomDetail extends Component {
                                     placeholder='Số điện,...'
                                     value = {this.state.so_dien_moi}
                                     style={styles.input}
+                                    keyboardType = "numeric"
                                     onChangeText={(text) => this.setState({so_dien_moi : text})}
                                 />   
                             </View>
@@ -47,6 +48,7 @@ export default class RoomDetail extends Component {
                                     value={this.state.so_nuoc_moi}
                                     placeholderTextColor = '#777777'
                                     style={styles.input}
+                                    keyboardType = "numeric"
                                     onChangeText={(text) => this.setState({ so_nuoc_moi : text })}
                                 />
                             </View>
@@ -92,10 +94,10 @@ export default class RoomDetail extends Component {
                 this.setState ({
                     hoa_don_thang: bill.hoa_don_thang,
                     ngay_lap: bill.ngay_lap,
-                    so_nuoc_cu: 'hell',
-                    so_nuoc_moi: bill.so_dien_moi,
+                    so_nuoc_cu: bill.so_nuoc_cu,
+                    so_nuoc_moi: bill.so_nuoc_moi.toString(),
                     so_dien_cu: bill.so_dien_cu,
-                    so_dien_moi: bill.so_dien_moi,
+                    so_dien_moi: bill.so_dien_moi.toString(),
                 })
                 console.log(this.state.bill);
             }        

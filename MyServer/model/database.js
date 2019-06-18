@@ -68,7 +68,7 @@ function getHoaDonMoi(callback, params){
 
 function getDienNuoc(callback, params){
     console.log('params : ' + params)
-    connection.query('SELECT hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, so_dien_cu, so_dien_moi FROM hoa_don where id_phong =? order by id_hoa_don desc limit 1', params, function (error, results, fields) {
+    connection.query('SELECT hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, so_dien_cu, so_dien_moi FROM hoa_don WHERE id_phong =? order by id_hoa_don desc LIMIT 1', params, function (error, results, fields) {
         if (error){
             callback(null,error)
         }
@@ -78,7 +78,7 @@ function getDienNuoc(callback, params){
 
 function getRoomDetail(callback, params){
     console.log('params : ' + params)
-    connection.query('SELECT ten_phong, ten_loai, gia_phong, mo_ta, ghi_chu FROM phong INNER JOIN loai_phong ON phong.id_loai = loai_phong.id_loai where id_phong =?', params, function (error, results, fields) {
+    connection.query('SELECT ten_phong, ten_loai, gia_phong, mo_ta, ghi_chu FROM phong INNER JOIN loai_phong ON phong.id_loai = loai_phong.id_loai WHERE id_phong =?', params, function (error, results, fields) {
         if (error){
             callback(null,error)
         }
@@ -162,6 +162,70 @@ function deleteProfile(callback, params){
     });
 }
 
+function getMotorDetail(callback, params){
+    console.log('params : ' + params)
+    let query = `SELECT * FROM ql_xe WHERE id_phong =`+params    
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error !== null){
+            console.log('error : ' + error)
+            callback(null,error)
+            return
+        }        
+        console.log('results : ' + results)
+        callback(results, null)
+    });
+}
+
+function createMotor(callback, params){
+    console.log('params : ' + params)
+    let query = `INSERT INTO ql_xe ( id_xe, id_phong, so_xe, mo_ta)
+        VALUE( null, ` + params.id_phong + `, '` + params.so_xe + `', '` + params.mo_ta + `')` 
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error !== null){
+            console.log('error : ' + error)
+            callback(null,error)
+            return
+        }        
+        console.log('results : ' + results)
+        callback(results, null)
+    });
+}
+
+function updateMotor(callback, params){
+    console.log('params : ' + params)
+    let query = `UPDATE ql_xe SET ` 
+        + `so_xe = '` + params.ho_ten + `', `
+        + `mo_ta = '` + params.gioi_tinh + `' `
+        + `WHERE id_xe = `+ params.id_xe
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error !== null){
+            console.log('error : ' + error)
+            callback(null,error)
+            return
+        }        
+        console.log('results : ' + results)
+        callback(results, null)
+    });
+}
+
+function deleteMotor(callback, params){
+    console.log('params : ' + params)
+    let query = `DELETE FROM ql_xe WHERE id_xe = `+params
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error !== null){
+            console.log('error : ' + error)
+            callback(null,error)
+            return
+        }        
+        console.log('results : ' + results)
+        callback(results, null)
+    });
+}
+
 module.exports = {
     connection:connection,
     connect:connect,
@@ -176,5 +240,9 @@ module.exports = {
     getHoaDonMoi:getHoaDonMoi,
     getDienNuoc:getDienNuoc,
     getRoomDetail:getRoomDetail,
-    getBangGia:getBangGia
+    getBangGia:getBangGia,
+    getMotorDetail:getMotorDetail,
+    createMotor:createMotor,
+    updateMotor:updateMotor,
+    deleteMotor:deleteMotor,
 }
