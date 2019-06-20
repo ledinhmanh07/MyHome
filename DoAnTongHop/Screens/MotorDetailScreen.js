@@ -3,6 +3,7 @@ import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, Scrol
 import axios from 'axios'
 import * as Common from '@constants/Common'
 import * as ApiConfig from '@constants/ApiConfig'
+import Wrapper from './Loading'
 
 export default class MotorDetailScreen extends Component {
     constructor(props) {
@@ -13,7 +14,8 @@ export default class MotorDetailScreen extends Component {
             so_xe: '',
             mo_ta: '',
             isCreate: false,
-            isUpdate: false
+            isUpdate: false,
+            visible: false
         }
     }
 
@@ -34,7 +36,7 @@ export default class MotorDetailScreen extends Component {
     // onClickUpdateProfile = (id) => {
     //     this.props.navigation.navigate('UpdateProfileScreen', {id : id})
     // }
-
+    
     onClickCreateMotor = () => {
         Alert.alert(
             'Cập nhập thông tin',
@@ -45,6 +47,9 @@ export default class MotorDetailScreen extends Component {
                         Alert.alert("Bạn phải nhập đầy đủ thông tin,...!!!")
                     }
                     else{
+                        this.setState({
+                            visible: true
+                        }) 
                         this.createMotor()
                     }    
               }},              
@@ -81,7 +86,10 @@ export default class MotorDetailScreen extends Component {
             else
             {
                 Alert.alert('Thêm dữ liệu không thành công!!!');
-            }        
+            }     
+            this.setState({
+                visible: false
+            }) 
         })
         .catch(error => {
                 console.log(error);
@@ -96,7 +104,12 @@ export default class MotorDetailScreen extends Component {
             'Cập nhập thông tin',
             'Bạn có muốn xóa thông tin này,...???',
             [
-              {text: 'Xóa', onPress: () => this.deleteMotorDetail()},              
+              {text: 'Xóa', onPress: () =>{
+                this.setState({
+                    visible: true
+                })   
+                this.deleteMotorDetail()
+              }},              
               {text: 'Hủy', onPress: () => console.log('Hủy xóa thông tin')},
             ],
             {cancelable: false},
@@ -125,7 +138,10 @@ export default class MotorDetailScreen extends Component {
             else
             {
                 Alert.alert('Xóa dữ liệu không thành công!!!')
-            }                    
+            }     
+            this.setState({
+                visible: false
+            })                  
         })
         .catch(error => {
                 console.log(error);
@@ -135,111 +151,116 @@ export default class MotorDetailScreen extends Component {
 
     render() {
         return (
-            <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <View style={{flex: 1, width: '100%', height: '100%'}}>
-                    <View style={{flex: 6, width: '100%', height: '100%'}}>
-                        <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
-                            <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
-                                {this.state.profile.map( (item) =>{
-                                    return (
-                                        <View style={styles.profile} key={item.id_xe}>                                            
-                                            <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>      
-                                                <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 5}}>{item.so_xe}</Text>                                          
-                                                <Text style={{fontSize: 15, width: '95%', textAlign: "center"}}>Mô tả: {item.mo_ta}</Text>
-                                            </View>
-                                            <View style={{flex:2, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
-                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onClickUpdateMotor(item.id_xe, item.so_xe, item.mo_ta)}>
-                                                    <Text style={{fontSize:15, color: '#000000'}} >Sửa</Text>
-                                                </TouchableOpacity>  
-                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={() => this.onClickDeleteMotor(item.id_xe)}>
-                                                    <Text style={{fontSize:15, color: '#000000'}} >Xoá</Text>
-                                                </TouchableOpacity>  
-                                            </View>
-                                        </View>                                        
-                                    )
-                                })}                               
-                                
-                            </View>     
-                        </ScrollView>  
-                    </View>  
-                    <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
-                        <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={() =>this.setState({ isCreate: true})}>
-                            <Image source={require('@assets/images/add_profile.png')} style={{height: '100%', width: '100%', resizeMode: 'contain', tintColor: '#00008B'}}/> 
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
-                {/* Thêm Thông Tin Xe  */}
-                {/* <Modal
-                    visible={this.state.isError}
-                    presentationStyle="overFullScreen"
-                    animationType="slide"
-                    transparent = {true}
-                >       
-                    <View style={{flex: 1, backgroundColor: 'rgba(59,89,152,0.5)', justifyContent: 'center', alignItems: 'center'}}>
-                        <View style={[Common.styles.popupBackground, styles.container]}>
-                            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={styles.message}> {GLOBAL.errorMessage} </Text>
-                            </View>
-                            <View style={styles.separator} />
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={() => this.setState({ isError: false })}>
-                                <Text style={[styles.button]}> {I18n.t("CANCEL")} </Text>
+            <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}> 
+                <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
+                    <View style={{flex: 1, width: '100%', height: '100%'}}>
+                        <View style={{flex: 6, width: '100%', height: '100%'}}>
+                            <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
+                                <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
+                                    {this.state.profile.map( (item) =>{
+                                        return (
+                                            <View style={styles.profile} key={item.id_xe}>                                            
+                                                <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>      
+                                                    <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 5}}>{item.so_xe}</Text>                                          
+                                                    <Text style={{fontSize: 15, width: '95%', textAlign: "center"}}>Mô tả: {item.mo_ta}</Text>
+                                                </View>
+                                                <View style={{flex:2, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
+                                                    <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onClickUpdateMotor(item.id_xe, item.so_xe, item.mo_ta)}>
+                                                        <Text style={{fontSize:15, color: '#000000'}} >Sửa</Text>
+                                                    </TouchableOpacity>  
+                                                    <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={() => this.onClickDeleteMotor(item.id_xe)}>
+                                                        <Text style={{fontSize:15, color: '#000000'}} >Xoá</Text>
+                                                    </TouchableOpacity>  
+                                                </View>
+                                            </View>                                        
+                                        )
+                                    })}                               
+                                    
+                                </View>     
+                            </ScrollView>  
+                        </View>  
+                        <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
+                            <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={() =>this.setState({ isCreate: true})}>
+                                <Image source={require('@assets/images/add_profile.png')} style={{height: '100%', width: '100%', resizeMode: 'contain', tintColor: '#00008B'}}/> 
                             </TouchableOpacity>
-                        </View>                        
-                        
+                        </View>
                     </View>
-                </Modal> */}
 
-                {/* Sửa Thông Tin Xe */} 
-                <Modal
-                    visible={this.state.isCreate}
-                    presentationStyle="overFullScreen"
-                    animationType="slide"
-                    transparent = {true}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                    }}
-                >       
-                    <View style={{flex: 1, width: '100%', height: '100%', backgroundColor: 'rgba(59,89,152,0.5)', justifyContent: 'center', alignItems: 'center'}}>
-                        <View style={styles.form}>
-                            <View style={{flex:2, width: '95%', height: '100%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 0.5}}>
-                                <View style={styles.viewInput}>
-                                    <Text style={styles.label}>Số xe</Text>
-                                    <TextInput                            
-                                        placeholder='Số xe,...'
-                                        placeholderTextColor = '#777777'
-                                        style={styles.input}
-                                        onChangeText={(text) => this.setState({ so_xe : text })}
-                                    />
-                                </View>                              
-                                <View style={styles.viewInput}>
-                                    <Text style={styles.label}>Mô tả</Text>
-                                    <TextInput                            
-                                        placeholder='Mô tả,...'
-                                        placeholderTextColor = '#777777'
-                                        style={styles.input}
-                                        onChangeText={(text) => this.setState({ mo_ta: text})}
-                                    />  
-                                </View>                            
-                            </View>
-                            <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
-                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() =>this.setState({ isCreate: false})}>
-                                    <Text style={{fontSize:15, color: '#000000'}} >Hủy</Text>
-                                </TouchableOpacity>  
-                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={this.onClickCreateMotor}>
-                                    <Text style={{fontSize:15, color: '#000000'}} >Lưu</Text>
-                                </TouchableOpacity>  
-                            </View>
-                        </View>      
-                    </View>
-                </Modal>
-            </ImageBackground>
+                    {/* Thêm Thông Tin Xe  */}
+                    {/* <Modal
+                        visible={this.state.isError}
+                        presentationStyle="overFullScreen"
+                        animationType="slide"
+                        transparent = {true}
+                    >       
+                        <View style={{flex: 1, backgroundColor: 'rgba(59,89,152,0.5)', justifyContent: 'center', alignItems: 'center'}}>
+                            <View style={[Common.styles.popupBackground, styles.container]}>
+                                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                                    <Text style={styles.message}> {GLOBAL.errorMessage} </Text>
+                                </View>
+                                <View style={styles.separator} />
+                                <TouchableOpacity
+                                    style={styles.button}
+                                    onPress={() => this.setState({ isError: false })}>
+                                    <Text style={[styles.button]}> {I18n.t("CANCEL")} </Text>
+                                </TouchableOpacity>
+                            </View>                        
+                            
+                        </View>
+                    </Modal> */}
+
+                    {/* Sửa Thông Tin Xe */} 
+                    <Modal
+                        visible={this.state.isCreate}
+                        presentationStyle="overFullScreen"
+                        animationType="slide"
+                        transparent = {true}
+                        onRequestClose={() => {
+                            Alert.alert('Modal has been closed.');
+                        }}
+                    >       
+                        <View style={{flex: 1, width: '100%', height: '100%', backgroundColor: 'rgba(59,89,152,0.5)', justifyContent: 'center', alignItems: 'center'}}>
+                            <View style={styles.form}>
+                                <View style={{flex:3, width: '95%', height: '100%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 0.5}}>
+                                    <View style={styles.viewInput}>
+                                        <Text style={styles.label}>Số xe</Text>
+                                        <TextInput                            
+                                            placeholder='Số xe,...'
+                                            placeholderTextColor = '#777777'
+                                            style={styles.input}
+                                            onChangeText={(text) => this.setState({ so_xe : text })}
+                                        />
+                                    </View>                              
+                                    <View style={styles.viewInput}>
+                                        <Text style={styles.label}>Mô tả</Text>
+                                        <TextInput                            
+                                            placeholder='Mô tả,...'
+                                            placeholderTextColor = '#777777'
+                                            style={styles.input}
+                                            onChangeText={(text) => this.setState({ mo_ta: text})}
+                                        />  
+                                    </View>                            
+                                </View>
+                                <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
+                                    <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '100%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() =>this.setState({ isCreate: false})}>
+                                        <Text style={{fontSize:15, color: '#000000'}} >Hủy</Text>
+                                    </TouchableOpacity>  
+                                    <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '100%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={this.onClickCreateMotor}>
+                                        <Text style={{fontSize:15, color: '#000000'}} >Lưu</Text>
+                                    </TouchableOpacity>  
+                                </View>
+                            </View>      
+                        </View>
+                    </Modal>
+                </ImageBackground>
+            </Wrapper>
         )
     }
 
     componentDidMount = () => {
+        this.setState({
+            visible: true
+        }) 
         this.fetchMotorDetail();
     }
     
@@ -265,6 +286,9 @@ export default class MotorDetailScreen extends Component {
                 })
                 console.log(this.state.profile);
             }        
+            this.setState({
+                visible: false
+            }) 
         })
         .catch(error => {
                 console.log(error);
@@ -300,7 +324,7 @@ const styles = StyleSheet.create({
     },
     form: {
         backgroundColor: '#ffffff',   
-        height: 220,      
+        height: 180,      
         alignItems: 'center', 
         width: '90%', 
         borderRadius: 20,  
@@ -349,5 +373,8 @@ const styles = StyleSheet.create({
         color: '#000', 
         fontSize: Common.labelSize, 
         width: '35%'
+    },
+    loading: {
+        flex:1
     }
 })

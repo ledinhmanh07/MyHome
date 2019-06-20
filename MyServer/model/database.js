@@ -14,6 +14,8 @@ function connect(callback){
     });
 }
 
+
+// Phòng
 function getPhong(callback){
     connection.query('SELECT * FROM phong where', function (error, results, fields) {
         if (error){
@@ -23,6 +25,7 @@ function getPhong(callback){
     });
 }
 
+// Khách trọ
 function getKhachTro(callback, params){
     console.log('params : ' + params)
     connection.query('SELECT * FROM khach_tro where id_phong =?', params, function (error, results, fields) {
@@ -37,68 +40,6 @@ function getKhachTro(callback, params){
 function getKhachTro1(callback, params){
     console.log('params : ' + params)
     let query = `SELECT * FROM khach_tro where id =` + params
-    console.log('query : ' + query)
-    connection.query(query, function (error, results, fields) {
-        if (error){
-            callback(null,error)
-        }
-        callback(results)
-    });
-}
-
-function getHoaDon(callback, params){
-    console.log('params : ' + params)
-    connection.query('SELECT * FROM hoa_don where id_phong =? order by id_hoa_don desc', params, function (error, results, fields) {
-        if (error){
-            callback(null,error)
-        }
-        callback(results)
-    });
-}
-
-function getHoaDonMoi(callback, params){
-    console.log('params : ' + params)
-    connection.query('SELECT * FROM hoa_don where id_phong =? order by id_hoa_don desc limit 1', params, function (error, results, fields) {
-        if (error){
-            callback(null,error)
-        }
-        callback(results)
-    });
-}
-
-function getDienNuoc(callback, params){
-    console.log('params : ' + params)
-    connection.query('SELECT hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, so_dien_cu, so_dien_moi FROM hoa_don WHERE id_phong =? order by id_hoa_don desc LIMIT 1', params, function (error, results, fields) {
-        if (error){
-            callback(null,error)
-        }
-        callback(results)
-    });
-}
-
-function getRoomDetail(callback, params){
-    console.log('params : ' + params)
-    connection.query('SELECT ten_phong, ten_loai, gia_phong, mo_ta, ghi_chu FROM phong INNER JOIN loai_phong ON phong.id_loai = loai_phong.id_loai WHERE id_phong =?', params, function (error, results, fields) {
-        if (error){
-            callback(null,error)
-        }
-        callback(results[0])
-    });
-}
-
-function getBangGia(callback, params){
-    console.log('params : ' + params)
-    connection.query('SELECT * FROM bang_gia', params, function (error, results, fields) {
-        if (error){
-            callback(null,error)
-        }
-        callback(results)
-    });
-}
-
-function testTaiKhoan(callback, params){
-    console.log('params : ' + params)
-    let query = `SELECT * FROM tai_khoan_user where ten_dn=` + `'` + params.userName + `'` + ` and pass = `+ `'` + params.pass+ `'` 
     console.log('query : ' + query)
     connection.query(query, function (error, results, fields) {
         if (error){
@@ -162,6 +103,91 @@ function deleteProfile(callback, params){
     });
 }
 
+// Hóa đơn
+function getHoaDon(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT * FROM hoa_don where id_phong =? AND ngay_lap IS NOT NULL order by id_hoa_don desc', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+function getHoaDonMoi(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT * FROM hoa_don where id_phong =? order by id_hoa_don desc limit 1', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+function getDienNuoc(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT id_hoa_don, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, so_dien_cu, so_dien_moi FROM hoa_don WHERE id_phong =? order by id_hoa_don desc LIMIT 1', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+function updateDienNuoc(callback, params){
+    console.log('params : ' + params)
+    let query = `UPDATE hoa_don SET ` 
+        + `so_nuoc_moi = '` + params.so_nuoc_moi + `', `
+        + `so_dien_moi = '` + params.so_dien_moi + `' `
+        + `WHERE id_hoa_don = `+ params.id_hoa_don + ` AND ngay_lap IS NULL`
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error !== null){
+            console.log('error : ' + error)
+            callback(null,error)
+            return
+        }        
+        console.log('results : ' + results)
+        callback(results, null)
+    });
+}
+
+// Thông tin phòng
+function getRoomDetail(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT ten_phong, ten_loai, gia_phong, mo_ta, ghi_chu FROM phong INNER JOIN loai_phong ON phong.id_loai = loai_phong.id_loai WHERE id_phong =?', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results[0])
+    });
+}
+
+function getBangGia(callback, params){
+    console.log('params : ' + params)
+    connection.query('SELECT * FROM bang_gia', params, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+
+// Tài khoản
+function testTaiKhoan(callback, params){
+    console.log('params : ' + params)
+    let query = `SELECT * FROM tai_khoan_user where ten_dn=` + `'` + params.userName + `'` + ` and pass = `+ `'` + params.pass+ `'` 
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+
+// Xe
 function getMotorDetail(callback, params){
     console.log('params : ' + params)
     let query = `SELECT * FROM ql_xe WHERE id_phong =`+params    
@@ -245,4 +271,5 @@ module.exports = {
     createMotor:createMotor,
     updateMotor:updateMotor,
     deleteMotor:deleteMotor,
+    updateDienNuoc:updateDienNuoc,
 }

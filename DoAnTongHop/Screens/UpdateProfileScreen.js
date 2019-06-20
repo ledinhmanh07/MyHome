@@ -3,6 +3,7 @@ import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, TextI
 import * as Common from '@constants/Common'
 import * as ApiConfig from '@constants/ApiConfig'
 import axios from 'axios'
+import Wrapper from './Loading'
 
 export default class UpdateProfileScreen extends Component {
     
@@ -39,7 +40,12 @@ export default class UpdateProfileScreen extends Component {
             'Cập nhập thông tin',
             'Bạn có muốn cập nhập thông tin này,...???',
             [
-              {text: 'Cập nhập', onPress: () => this.updateProfile()},              
+              {text: 'Cập nhập', onPress: () =>{
+                this.setState({
+                    visible: true
+                })
+                this.updateProfile()
+              }},              
               {text: 'Hủy', onPress: () => console.log('Hủy cập nhập')},
             ],
             {cancelable: false},
@@ -69,12 +75,15 @@ export default class UpdateProfileScreen extends Component {
             console.log(result);
             if(result){
                 Alert.alert('Cập nhập dữ liệu thành công!!!')
-                this.props.navigation.goBack()   
+                this.props.navigation.goBack()
             }
             else
             {
                 Alert.alert('Cập nhập dữ liệu không thành công!!!')
-            }                    
+            }
+            this.setState({
+                visible: false
+            })
         })
         .catch(error => {
                 console.log(error);
@@ -83,85 +92,88 @@ export default class UpdateProfileScreen extends Component {
     }
 
     render() {
-        return (                        
-            <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', height: '100%', marginTop: Common.deviceHeight/10, marginBottom: Common.deviceHeight/10}} >       
-                      
-                    <View style={styles.form}>
-                        <View style={{flex:6, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
-                            <View style={styles.viewInput}>
-                                <Text style={styles.label}>Họ và tên:</Text>
-                                <TextInput                            
-                                    placeholder='Họ và tên,...'
-                                    value={this.state.ho_ten}
-                                    placeholderTextColor = '#777777'
-                                    style={styles.input}
-                                    onChangeText={(text) => this.setState({ ho_ten : text })}
-                                />
-                            </View>                            
-                            <View style={styles.viewInput}>
-                                <Text style={styles.label}>Giới tính</Text>
-                                <TextInput                            
-                                    placeholder='Giới tính,...'
-                                    value={this.state.gioi_tinh}
-                                    placeholderTextColor = '#777777'
-                                    style={styles.input}
-                                    onChangeText={(text) => this.setState({ gioi_tinh : text })}
-                                />  
+        return ( 
+            <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>                       
+                <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
+                    <View style={{flex: 1, justifyContent : 'center', alignItems: 'center', width: '100%', height: '100%', marginTop: Common.deviceHeight/10, marginBottom: Common.deviceHeight/10}} >       
+                        <View style={styles.form}>
+                            <View style={{flex:6, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>Họ và tên:</Text>
+                                    <TextInput                            
+                                        placeholder='Họ và tên,...'
+                                        value={this.state.ho_ten}
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({ ho_ten : text })}
+                                    />
+                                </View>                            
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>Giới tính</Text>
+                                    <TextInput                            
+                                        placeholder='Giới tính,...'
+                                        value={this.state.gioi_tinh}
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({ gioi_tinh : text })}
+                                    />  
+                                </View>
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>Nghề nghiệp</Text>
+                                    <TextInput                            
+                                        placeholder='Nghề nghiệp,...'
+                                        value={this.state.nghe_nghiep}
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({ nghe_nghiep : text })}
+                                    />  
+                                </View>
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>Ngày sinh</Text>
+                                    <TextInput                            
+                                        placeholder='Ngày sinh,...'
+                                        value={this.state.nam_sinh}
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({nam_sinh : text})}
+                                    />  
+                                </View>
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>Số CMND</Text>
+                                    <TextInput                            
+                                        placeholder='Số CMND,...'
+                                        value={this.state.cmnd}
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({ cmnd: text})}
+                                    />  
+                                </View>
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>HKTT</Text>
+                                    <TextInput                            
+                                        placeholder='Hộ khẩu thường trú,...'
+                                        value={this.state.hktt}
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({ hktt : text})}
+                                    />  
+                                </View>
                             </View>
-                            <View style={styles.viewInput}>
-                                <Text style={styles.label}>Nghề nghiệp</Text>
-                                <TextInput                            
-                                    placeholder='Nghề nghiệp,...'
-                                    value={this.state.nghe_nghiep}
-                                    placeholderTextColor = '#777777'
-                                    style={styles.input}
-                                    onChangeText={(text) => this.setState({ nghe_nghiep : text })}
-                                />  
-                            </View>
-                            <View style={styles.viewInput}>
-                                <Text style={styles.label}>Ngày sinh</Text>
-                                <TextInput                            
-                                    placeholder='Ngày sinh,...'
-                                    value={this.state.nam_sinh}
-                                    placeholderTextColor = '#777777'
-                                    style={styles.input}
-                                    onChangeText={(text) => this.setState({nam_sinh : text})}
-                                />  
-                            </View>
-                            <View style={styles.viewInput}>
-                                <Text style={styles.label}>Số CMND</Text>
-                                <TextInput                            
-                                    placeholder='Số CMND,...'
-                                    value={this.state.cmnd}
-                                    placeholderTextColor = '#777777'
-                                    style={styles.input}
-                                    onChangeText={(text) => this.setState({ cmnd: text})}
-                                />  
-                            </View>
-                            <View style={styles.viewInput}>
-                                <Text style={styles.label}>HKTT</Text>
-                                <TextInput                            
-                                    placeholder='Hộ khẩu thường trú,...'
-                                    value={this.state.hktt}
-                                    placeholderTextColor = '#777777'
-                                    style={styles.input}
-                                    onChangeText={(text) => this.setState({ hktt : text})}
-                                />  
+                            <View style={styles.viewButton}>
+                                <TouchableOpacity style={styles.button} onPress={this.onSaveClick}>
+                                    <Text style={{fontSize:Common.titleSize, color: '#fff'}} >Lưu</Text>
+                                </TouchableOpacity>  
                             </View>
                         </View>
-                        <View style={styles.viewButton}>
-                            <TouchableOpacity style={styles.button} onPress={this.onSaveClick}>
-                                <Text style={{fontSize:Common.titleSize, color: '#fff'}} >Lưu</Text>
-                            </TouchableOpacity>  
-                        </View>
-                    </View>   
-                    
-                </View>  
-            </ImageBackground>
+                    </View>  
+                </ImageBackground>
+            </Wrapper>
         )
     }
     componentDidMount = () => {
+        this.setState({
+            visible: true
+        })
         this.fetchProfile();
     }
     
@@ -193,7 +205,10 @@ export default class UpdateProfileScreen extends Component {
                     "nghe_nghiep": profile.nghe_nghiep   
                 })
                 console.log(profile);
-            }        
+            }
+            this.setState({
+                visible: false
+            })
         })
         .catch(error => {
                 console.log(error);
@@ -254,5 +269,8 @@ const styles = StyleSheet.create({
         color: '#000', 
         fontSize: Common.labelSize, 
         width: '35%'
+    },
+    loading: {
+        flex:1
     }
 })

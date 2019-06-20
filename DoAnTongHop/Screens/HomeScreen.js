@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
 
 export default class HomeScreen extends Component {
-    
+    constructor(props){
+        super(props);
+        // global.idPhong = 4;
+        // global.idUser = 1;
+    }
     static navigationOptions = {
         title: 'Welcome Screen',
         header: null

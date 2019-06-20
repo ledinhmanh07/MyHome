@@ -202,12 +202,14 @@ VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), 'dinhmanh', '
 ------------------------------------------------------------
 -- Thêm dữ liệu 'Hóa Đơn'
 -- SELECT CURDATE() <lấy ngày hiện tại> 
+INSERT INTO hoa_don ( id_hoa_don, id_phong, id_user, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, gia_nuoc, so_dien_cu, so_dien_moi, gia_dien, so_xe, gia_xe, internet, truyen_hinh_cap, ve_sinh, khac, gia_phong, tong_tien, tinh_trang )
+VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_user FROM tai_khoan_user where id_phong = (SELECT id_phong FROM phong WHERE ten_phong = '301')), '04/2019', '25/04/2019', 100, 120, 4000, 102, 120, 15000, 3, 150000, 120000, 0, 40000, null, 3800000, 4800000, false);
 
 INSERT INTO hoa_don ( id_hoa_don, id_phong, id_user, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, gia_nuoc, so_dien_cu, so_dien_moi, gia_dien, so_xe, gia_xe, internet, truyen_hinh_cap, ve_sinh, khac, gia_phong, tong_tien, tinh_trang )
 VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_user FROM tai_khoan_user where id_phong = (SELECT id_phong FROM phong WHERE ten_phong = '301')), '05/2019', '25/05/2019', 120, 150, 4000, 120, 133, 15000, 3, 150000, 120000, 0, 40000, null, 3800000, 4800000, false);
 
 INSERT INTO hoa_don ( id_hoa_don, id_phong, id_user, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, gia_nuoc, so_dien_cu, so_dien_moi, gia_dien, so_xe, gia_xe, internet, truyen_hinh_cap, ve_sinh, khac, gia_phong, tong_tien, tinh_trang )
-VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_user FROM tai_khoan_user where id_phong = (SELECT id_phong FROM phong WHERE ten_phong = '301')), '06/2019', '25/05/2019', 150, 182, 4000, 132, 140, 15000, 3, 150000, 120000, 0, 40000, null, 3800000, 4850000, false);
+VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_user FROM tai_khoan_user where id_phong = (SELECT id_phong FROM phong WHERE ten_phong = '301')), '06/2019', null, 150, 182, 4000, 132, 140, 15000, 3, 150000, 120000, 0, 40000, null, 3800000, 4850000, false);
 
 ------------------------------------------------------------
 -- Thêm dữ liệu 'Tài Khoản ADMIN'

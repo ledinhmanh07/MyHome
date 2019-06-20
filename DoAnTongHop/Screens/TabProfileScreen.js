@@ -4,7 +4,7 @@ import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity } from
 export default class TabProfileScreen extends Component {
     
     static navigationOptions = {
-        title: 'Hóa Đơn',
+        title: 'Thông Tin',
         headerStyle: {
             backgroundColor: '#3B5998',   
           },

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, ScrollView , Alert} from 'react-native'
 import axios from 'axios'
 import * as ApiConfig from '@constants/ApiConfig'
+import Wrapper from './Loading'
 
 export default class ProfileScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             profile : [],
-            id : 0
+            id : 0,
+            visible: false
         }        
     }
 
@@ -41,7 +43,12 @@ export default class ProfileScreen extends Component {
             'Cập nhập thông tin',
             'Bạn có muốn xóa thông tin này,...???',
             [
-              {text: 'Xóa', onPress: () => this.deleteProfile()},              
+              {text: 'Xóa', onPress: () =>{
+                    this.setState({
+                        visible: true
+                    })
+                    this.deleteProfile()
+              }},              
               {text: 'Hủy', onPress: () => console.log('Hủy xóa thông tin')},
             ],
             {cancelable: false},
@@ -70,7 +77,10 @@ export default class ProfileScreen extends Component {
             else
             {
                 Alert.alert('Xóa dữ liệu không thành công!!!')
-            }                    
+            }
+            this.setState({
+                visible: false
+            })
         })
         .catch(error => {
                 console.log(error);
@@ -80,6 +90,7 @@ export default class ProfileScreen extends Component {
 
     render() {
         return (
+            <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
                 <View style={{flex: 1, width: '100%', height: '100%'}}>
                     <View style={{flex: 6, width: '100%', height: '100%'}}>
@@ -117,10 +128,14 @@ export default class ProfileScreen extends Component {
                     </View>
                 </View>
             </ImageBackground>
+            </Wrapper>
         )
     }
 
     componentDidMount = () => {
+        this.setState({
+            visible: true
+        })
         this.fetchProfile();
     }
     
@@ -145,7 +160,10 @@ export default class ProfileScreen extends Component {
                     profile : profile
                 })
                 console.log(this.state.profile);
-            }        
+            }
+            this.setState({
+                visible: false
+            })
         })
         .catch(error => {
                 console.log(error);
@@ -172,5 +190,8 @@ const styles = StyleSheet.create({
         shadowRadius: 5, 
         shadowOpacity: 0.5,
         elevation: 5,
+    },
+    loading: {
+        flex:1
     }
 })

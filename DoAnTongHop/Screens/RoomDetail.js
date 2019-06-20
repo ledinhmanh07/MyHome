@@ -3,7 +3,7 @@ import { View, Image, ImageBackground ,Text, StyleSheet, ScrollView, Alert } fro
 import * as Common from '@constants/Common'
 import axios from 'axios'
 import * as ApiConfig from '@constants/ApiConfig'
-import { Item } from 'native-base';
+import Wrapper from './Loading'
 
 export default class RoomDetail extends Component {
     constructor(props){
@@ -13,9 +13,9 @@ export default class RoomDetail extends Component {
             ten_loai : '',
             gia_phong : '',
             mo_ta : '',
-            ghi_chu : '',                
-            
-            bang_gia: []
+            ghi_chu : '',
+            bang_gia: [],
+            visible: false
         }
     }
 
@@ -33,37 +33,38 @@ export default class RoomDetail extends Component {
           },
     };
 
-    onClick = () => {
-        this.props.navigation.navigate('CreatePinScreen')
-    }
-
     render() {
-        return (                        
-            <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
-                    <View style={{width: '70%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#008080'}}>
-                        <Image source={require('@assets/images/logo.png')} style={{height: 80, resizeMode: 'contain', marginVertical: 10}}/>                 
-                        <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>PHÒNG: {this.state.ten_phong}</Text>
-                    </View>   
-                    <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
-                        <Text style={styles.text}>Loại phòng: {this.state.ten_loai}</Text>
-                        <Text style={styles.text}>Giá phòng: {this.state.gia_phong} vnđ / 1 tháng</Text>
-                        {this.state.bang_gia.map( (item) =>{
-                                    return (
-                                        <Text style={styles.text} key={item.id_gia}>{item.ten_gia}: {item.gia} ({item.don_vi})</Text>
-                                    )
-                                    })
-                        }
-                        <Text style={styles.text}>Mô tả: </Text>
-                        <Text style={styles.text}>{this.state.mo_ta}</Text>
-                        <Text style={styles.text}>Ghi chú: </Text>
-                        <Text style={styles.text}>{this.state.ghi_chu}</Text>
-                    </View>   
-                </ScrollView>  
-            </ImageBackground>
+        return (       
+            <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>             
+                <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
+                    <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
+                        <View style={{width: '70%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#008080'}}>
+                            <Image source={require('@assets/images/logo.png')} style={{height: 80, resizeMode: 'contain', marginVertical: 10}}/>                 
+                            <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20}}>PHÒNG: {this.state.ten_phong}</Text>
+                        </View>   
+                        <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
+                            <Text style={styles.text}>Loại phòng: {this.state.ten_loai}</Text>
+                            <Text style={styles.text}>Giá phòng: {this.state.gia_phong} vnđ / 1 tháng</Text>
+                            {this.state.bang_gia.map( (item) =>{
+                                return (
+                                    <Text style={styles.text} key={item.id_gia}>{item.ten_gia}: {item.gia} ({item.don_vi})</Text>
+                                )
+                                })
+                            }
+                            <Text style={styles.text}>Mô tả: </Text>
+                            <Text style={styles.text}>{this.state.mo_ta}</Text>
+                            <Text style={styles.text}>Ghi chú: </Text>
+                            <Text style={styles.text}>{this.state.ghi_chu}</Text>
+                        </View>   
+                    </ScrollView>  
+                </ImageBackground>
+            </Wrapper>
         )
     }
     componentDidMount = () => {
+        this.setState({
+            visible: true
+        }) 
         this.fetchRoomDetail();
     }
     
@@ -112,6 +113,9 @@ export default class RoomDetail extends Component {
                })
                console.log(this.state);
            }        
+           this.setState({
+            visible: false
+        }) 
        })
        .catch(error => {
                console.log(error);
@@ -126,5 +130,8 @@ const styles = StyleSheet.create({
         color: '#000000', 
         width: '70%', 
         textAlign: 'center'
+    },
+    loading: {
+        flex:1
     }
 })

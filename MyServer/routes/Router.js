@@ -69,6 +69,23 @@ Router.post('/api/getDienNuoc',(req,res)=>{
         res.json(result[0])
     },req.body.data.idPhong)
 })
+Router.post('/api/updateDienNuoc',(req,res)=>{
+    console.log(req.body)
+    // let dienNuoc = {
+    //     "id_hoa_don": req.body.data.id_hoa_don,
+    //     "so_nuoc_moi": req.body.data.so_nuoc_moi,
+    //     "so_dien_moi": req.body.data.so_dien_moi,        
+    // }
+    db.updateDienNuoc((result,err)=>{
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
+            return;
+        }
+        console.log(result)      
+        res.json(true)
+    },req.body.data)
+})
 
 Router.post('/api/testTaiKhoan',(req,res)=>{    
     console.log(req.body)
