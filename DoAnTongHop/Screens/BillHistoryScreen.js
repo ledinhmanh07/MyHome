@@ -17,7 +17,7 @@ export default class BillHistoryScreen extends Component {
     static navigationOptions = {
         title: 'Lịch Sử Hóa Đơn',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: Common.titleColor,   
         },
         headerTintColor: '#ffffff',
         headerTitleStyle: {

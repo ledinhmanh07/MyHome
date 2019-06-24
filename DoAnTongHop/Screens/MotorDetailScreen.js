@@ -22,7 +22,7 @@ export default class MotorDetailScreen extends Component {
     static navigationOptions = {
         title: 'Thông Tin',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: Common.titleColor,   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {

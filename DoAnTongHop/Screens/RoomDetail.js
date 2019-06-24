@@ -22,7 +22,7 @@ export default class RoomDetail extends Component {
     static navigationOptions = {
         title: 'Thông Tin phòng',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: Common.titleColor,   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {
@@ -127,7 +127,7 @@ export default class RoomDetail extends Component {
 const styles = StyleSheet.create({
     text: {
         fontSize: Common.labelSize, 
-        color: '#000000', 
+        color: '#ffffff', 
         width: '70%', 
         textAlign: 'center'
     },

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity } from 'react-native'
 import * as Common from '@constants/Common'
 
-export default class TabProfileScreen extends Component {
+export default class MoreScreen extends Component {
     
     static navigationOptions = {
-        title: 'Thông Tin',
+        title: 'Khác',
         headerStyle: {
             backgroundColor: Common.titleColor,   
           },
@@ -18,11 +18,11 @@ export default class TabProfileScreen extends Component {
           },
     };
 
-    onClickProfile = () => {
-        this.props.navigation.navigate('ProfileScreen')
+    onClickChangePassword = () => {
+        this.props.navigation.navigate('ChangePasswordScreen')
     }
-    onClickMotorDetail = () => {
-        this.props.navigation.navigate('MotorDetailScreen')
+    onClickSupport = () => {
+        this.props.navigation.navigate('SupportScreen')
     }
 
     render() {
@@ -36,14 +36,14 @@ export default class TabProfileScreen extends Component {
                     <View style={{flex: 4, width:'100%', height: '100%', flexDirection: 'row'}}>
                         <View style={styles.viewButton}>
                             <TouchableOpacity style={styles.button} onPress={this.onClickProfile}>
-                                <Image source={require('@assets/images/bill_import.png')} style={styles.icon}/>
-                                <Text style={styles.textBtn} >Thông Tin Khách Trọ</Text>
+                                <Image source={require('@assets/images/changePass.png')} style={styles.icon}/>
+                                <Text style={styles.textBtn} >Đổi Mật Khẩu</Text>
                             </TouchableOpacity>  
                         </View>  
                         <View style={styles.viewButton}>
                             <TouchableOpacity style={styles.button} onPress={this.onClickMotorDetail}>
-                                <Image source={require('@assets/images/motorcycle.png')} style={styles.icon}/>   
-                                <Text style={styles.textBtn} >Xe Gửi Trọ</Text>
+                                <Image source={require('@assets/images/support.png')} style={styles.icon}/>   
+                                <Text style={styles.textBtn} >Hổ Trợ</Text>
                             </TouchableOpacity>
                         </View> 
                         

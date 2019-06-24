@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import {Tab, Tabs, Container, Header} from 'native-base'
 import EnterBillScreen from '@screens/EnterBillScreen';
 import CurrentBillScreen from '@screens/CurrentBillScreen';
+import * as Common from '@constants/Common'
+
 export default class TabBillScreen extends Component{
     static navigationOptions = {
         title: 'Hóa Đơn',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: Common.titleColor,   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {

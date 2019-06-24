@@ -4,8 +4,8 @@ import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, SafeA
 export default class HomeScreen extends Component {
     constructor(props){
         super(props);
-        // global.idPhong = 4;
-        // global.idUser = 1;
+        global.idPhong = 4;
+        global.idUser = 1;
     }
     static navigationOptions = {
         title: 'Welcome Screen',
@@ -20,6 +20,9 @@ export default class HomeScreen extends Component {
     }
     onClickProfile = () => {
         this.props.navigation.navigate('TabProfileScreen')
+    }
+    onClickMore = () => {
+        this.props.navigation.navigate('MoreScreen')
     }
 
     render() {
@@ -54,9 +57,9 @@ export default class HomeScreen extends Component {
                                 </TouchableOpacity>
                             </View>  
                             <View style={styles.viewButton}>
-                                <TouchableOpacity style={styles.button} onPress={this.onClick}>
-                                    <Image source={require('@assets/images/support.png')} style={styles.icon}/>
-                                    <Text style={styles.textBtn} >Hổ Trợ</Text>
+                                <TouchableOpacity style={styles.button} onPress={this.onClickMore}>
+                                    <Image source={require('@assets/images/more2.png')} style={styles.icon}/>
+                                    <Text style={styles.textBtn} >Khác</Text>
                                 </TouchableOpacity>
                             </View> 
                         </View>     

@@ -3,6 +3,7 @@ import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, Scrol
 import axios from 'axios'
 import * as ApiConfig from '@constants/ApiConfig'
 import Wrapper from './Loading'
+import * as Common from '@constants/Common'
 
 export default class ProfileScreen extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default class ProfileScreen extends Component {
     static navigationOptions = {
         title: 'Thông Tin',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: Common.titleColor,   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {

@@ -9,3 +9,4 @@ export const textSize = 14;
 export const textSizeInput = 15;
 export const labelSize = 16;
 export const titleSize = 20;
+export const titleColor = '#3B5998'

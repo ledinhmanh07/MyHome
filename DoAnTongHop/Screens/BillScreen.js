@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity } from 'react-native'
+import * as Common from '@constants/Common'
 
 export default class HomeScreen extends Component {
     
     static navigationOptions = {
         title: 'Hóa Đơn',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: Common.titleColor,   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {

@@ -24,7 +24,7 @@ export default class CreateProfileScreen extends Component {
     static navigationOptions = {
         title: 'Thêm Thông Tin',
         headerStyle: {
-            backgroundColor: '#3B5998',   
+            backgroundColor: Common.titleColor,   
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {

@@ -23,7 +23,7 @@ export default class UpdateProfileScreen extends Component {
     static navigationOptions = {
         title: 'Cập Nhập Thông Tin',
         headerStyle: {
-            backgroundColor: '#3B5998',
+            backgroundColor: Common.titleColor,
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {
