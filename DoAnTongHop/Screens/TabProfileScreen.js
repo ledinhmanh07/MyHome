@@ -31,7 +31,6 @@ export default class TabProfileScreen extends Component {
                 <View style={{ flex: 1, alignItems: 'center'}}>
                     <View style={{flex: 2 , alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 25, fontWeight: 'bold', color: '#8B0000'}}>NHÀ TRỌ THÔNG MINH</Text>
-                        <Image source={require('@assets/images/logo.png')} style={{height: '40%', resizeMode: 'contain'}}/>
                     </View>                        
                     <View style={{flex: 4, width:'100%', height: '100%', flexDirection: 'row'}}>
                         <View style={styles.viewButton}>
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
         height: '80%', 
         width: '80%', 
         backgroundColor: '#FFFFFF', 
-        opacity:0.8, 
         alignItems: 'center', 
         justifyContent: 'center',  
         borderRadius: 10,

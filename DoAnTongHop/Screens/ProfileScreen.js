@@ -92,27 +92,26 @@ export default class ProfileScreen extends Component {
     render() {
         return (
             <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>
-            <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <View style={{flex: 1, width: '100%', height: '100%'}}>
-                    <View style={{flex: 6, width: '100%', height: '100%'}}>
+                <View style={{flex: 1, width: '100%', height: '100%', backgroundColor: '#DDDDDD'}}>
+                    <View style={{flex: 7, width: '100%', height: '100%'}}>
                         <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
-                            <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
+                            <View style={{ alignItems: 'center', width: '100%', paddingBottom: 15, paddingTop: 15}}>
                                 {this.state.profile.map( (item) =>{
                                     return (
                                         <View style={styles.profile} key={item.id}>
                                             <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>
-                                                <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 5}}>{item.ho_ten} ({item.nghe_nghiep})</Text>
-                                                <Text style={{fontSize: 15, width: '100%'}}>Giới tính: {item.gioi_tinh}</Text>
-                                                <Text style={{fontSize: 15, width: '100%'}}>Ngày sinh: {item.ngay_sinh}</Text>
-                                                <Text style={{fontSize: 15, width: '100%'}}>CMND: {item.cmnd}</Text>
-                                                <Text style={{fontSize: 15, width: '100%'}}>HKTT: {item.hktt}</Text>
+                                                <Text style={{fontSize: Common.labelSize,  fontWeight: 'bold', marginBottom: 5}}>{item.ho_ten} ({item.nghe_nghiep})</Text>
+                                                <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>Giới tính: {item.gioi_tinh}</Text>
+                                                <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>Ngày sinh: {item.ngay_sinh}</Text>
+                                                <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>CMND: {item.cmnd}</Text>
+                                                <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>HKTT: {item.hktt}</Text>
                                             </View>
                                             <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
                                                 <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onClickUpdateProfile(item.id)}>
-                                                    <Text style={{fontSize:15, color: '#000000'}} >Sửa</Text>
+                                                    <Text style={{fontSize: Common.textSizeInput, color: '#000000'}} >Sửa</Text>
                                                 </TouchableOpacity>  
                                                 <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={() => this.onClickDeleteProfile(item.id)}>
-                                                    <Text style={{fontSize:15, color: '#000000'}} >Xoá</Text>
+                                                    <Text style={{fontSize: Common.textSizeInput, color: '#000000'}} >Xoá</Text>
                                                 </TouchableOpacity>  
                                             </View>
                                         </View>
@@ -122,13 +121,12 @@ export default class ProfileScreen extends Component {
                             </View>     
                         </ScrollView>  
                     </View>  
-                    <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center'}}>
+                    <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center', backgroundColor: Common.titleColor, borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                         <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={this.onClickCreateProfile}>
-                            <Image source={require('@assets/images/add_profile.png')} style={{height: '100%', width: '100%', resizeMode: 'contain', tintColor: '#00008B'}}/> 
+                            <Image source={require('@assets/images/add_profile.png')} style={{height: '100%', width: '100%', resizeMode: 'contain'}}/> 
                         </TouchableOpacity>
                     </View>
                 </View>
-            </ImageBackground>
             </Wrapper>
         )
     }
@@ -178,11 +176,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: 'white', 
-        width: '80%', 
+        width: '90%', 
         height: 180, 
         borderRadius: 10, 
-        marginTop: 20,         
-        opacity:0.8,
+        marginTop: 15,         
         shadowColor: '#000000', 
         shadowOffset: { 
             width: 0, 

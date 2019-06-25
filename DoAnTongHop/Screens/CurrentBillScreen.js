@@ -175,7 +175,6 @@ export default class CurrentBillScreen extends Component {
 
 const styles = StyleSheet.create({
     form: {
-        opacity:0.8, 
         backgroundColor: '#ffffff',      
         paddingHorizontal: '5%',   
         marginVertical: 25,

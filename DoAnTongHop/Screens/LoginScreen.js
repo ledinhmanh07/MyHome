@@ -4,7 +4,7 @@ import axios from 'axios'
 import * as Common from '@constants/Common'
 import * as ApiConfig from '@constants/ApiConfig'
 import Wrapper from './Loading'
-export default class LoginScreen extends Component {    
+export default class LoginScreen extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -21,10 +21,15 @@ export default class LoginScreen extends Component {
     };
 
     onClickLogIn = () => {
-        this.setState({
-            visible: true
-        })
-        this.testUserID()
+        if(this.state.userName !== ''|| this.state.pass !== ''){
+            this.setState({
+                visible: true
+            })
+            this.testUserID()
+        }
+        else{
+            Alert.alert("Đăng nhập thất bại","Bạn chưa nhập Tên Tài Khoản hoặc Mật Khẩu,...!!!")
+        }
     }
     
     testUserID = async() => {
@@ -84,13 +89,14 @@ export default class LoginScreen extends Component {
                         placeholderTextColor = '#AAAAAA'
                         style={styles.textInput}
                         secureTextEntry={true}
+                        keyboardType="default"
                         onChangeText={(text) => this.setState({ pass: text})}
                     />       
                     <TouchableOpacity style={styles.button} onPress={this.onClickLogIn}>
-                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF'}} >ĐĂNG NHẬP</Text>
+                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', borderBottomWidth: 1}} >ĐĂNG NHẬP</Text>
                     </TouchableOpacity>  
-                    <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginTop: '5%'}} onPress={this.onClick}>
-                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', borderBottomColor: '#FFFFFF', borderBottomWidth: 1}} >Quên mật khẩu!</Text>
+                    <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginTop: 5}} onPress={this.onClick}>
+                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', textDecorationLine: 'underline'}} >Quên mật khẩu!</Text>
                     </TouchableOpacity>                              
                 </ImageBackground>              
             </Wrapper>
@@ -127,7 +133,8 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         alignItems: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'blue'
     },
     logoText: {
         marginBottom: 30,

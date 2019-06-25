@@ -42,7 +42,7 @@ export default class UpdateProfileScreen extends Component {
             [
               {text: 'Cập nhập', onPress: () =>{
                 this.setState({
-                    visible: true
+                    visible: false
                 })
                 this.updateProfile()
               }},              

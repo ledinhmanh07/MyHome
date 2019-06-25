@@ -32,7 +32,6 @@ export default class HomeScreen extends Component {
                     <View style={{flex: 1}}></View>
                     <View style={{flex: 9 , alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 25, fontWeight: 'bold', color: '#8B0000'}}>NHÀ TRỌ THÔNG MINH</Text>
-                        <Image source={require('@assets/images/logo.png')} style={{height: '40%', resizeMode: 'contain'}}/>
                     </View>                        
                     <View style={{flex: 19, width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
                         <View style={styles.viewRowButton}>
@@ -58,7 +57,7 @@ export default class HomeScreen extends Component {
                             </View>  
                             <View style={styles.viewButton}>
                                 <TouchableOpacity style={styles.button} onPress={this.onClickMore}>
-                                    <Image source={require('@assets/images/more2.png')} style={styles.icon}/>
+                                    <Image source={require('@assets/images/more.png')} style={styles.icon}/>
                                     <Text style={styles.textBtn} >Khác</Text>
                                 </TouchableOpacity>
                             </View> 
@@ -91,7 +90,6 @@ const styles = StyleSheet.create({
         height: '80%', 
         width: '80%', 
         backgroundColor: '#FFFFFF', 
-        opacity:0.8, 
         alignItems: 'center', 
         justifyContent: 'center',  
         borderRadius: 10,        
