@@ -7,6 +7,8 @@ import Wrapper from './Loading'
 export default class LoginScreen extends Component {
     constructor(props){
         super(props)
+        global.idPhong = ''
+        global.idUser = ''
         this.state = {
             idPhong : '',
             userName: '',
@@ -75,8 +77,7 @@ export default class LoginScreen extends Component {
     render() {
         return (
             <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>              
-                <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%', justifyContent: 'center'}}>
-                    
+                <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={styles.logoText}>NHÀ TRỌ THÔNG MINH</Text>
                     <TextInput                            
                         placeholder='Tên Đăng Nhập'
@@ -93,7 +94,7 @@ export default class LoginScreen extends Component {
                         onChangeText={(text) => this.setState({ pass: text})}
                     />       
                     <TouchableOpacity style={styles.button} onPress={this.onClickLogIn}>
-                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', borderBottomWidth: 1}} >ĐĂNG NHẬP</Text>
+                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF'}} >ĐĂNG NHẬP</Text>
                     </TouchableOpacity>  
                     <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginTop: 5}} onPress={this.onClick}>
                         <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', textDecorationLine: 'underline'}} >Quên mật khẩu!</Text>
@@ -112,35 +113,38 @@ const styles = StyleSheet.create({
         fontSize: Common.textSizeInput,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#eaeaea',
-        backgroundColor: '#fafafa',
+        borderColor: '#AAAAAA',
+        backgroundColor: '#FFFFFF',
         paddingLeft: 10,
-        marginLeft: 15,
-        marginRight: 15,
-        marginTop: 5,
+        width: '90%',
+        marginTop: 10,
         marginBottom: 5,
-      
+        textAlign: 'center'
     },
     button:{
         height: 43,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#3B5998',
+        borderColor: Common.titleColor,
         backgroundColor: Common.titleColor,
         paddingLeft: 10,
-        marginLeft: 15,
-        marginRight: 15,
-        marginTop: 5,
+        width: '90%',
+        marginTop: 10,
         marginBottom: 5,
         alignItems: 'center', 
-        justifyContent: 'center',
-        backgroundColor: 'blue'
+        justifyContent: 'center'
     },
     logoText: {
-        marginBottom: 30,
+        marginBottom: 60,
         textAlign: 'center',
         fontSize: 25, 
         fontWeight: 'bold', 
-        color: '#3B5998'
+        color: '#3B5998',
+        paddingHorizontal: 10,
+        paddingTop: 5,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 5,
+        borderColor: '#3B5998',
+        borderWidth: 4,
     },
 })

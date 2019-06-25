@@ -31,6 +31,7 @@ export default class MotorDetailScreen extends Component {
             textAlign:"center", 
             flex:1 
           },
+          headerRight: <View style={{flex: 0.2}}/>
     };
 
     // onClickUpdateProfile = (id) => {
@@ -151,8 +152,8 @@ export default class MotorDetailScreen extends Component {
 
     render() {
         return (
-            <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}> 
-                <View style={{flex: 1, width: '100%', height: '100%', backgroundColor: '#DDDDDD'}}>
+            <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>
+                <ImageBackground source={require('@assets/images/background.png')} style={{flex: 1, width: '100%', height: '100%'}}>
                     <View style={{flex: 7, width: '100%', height: '100%'}}>
                         <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
                             <View style={{ alignItems: 'center', width: '100%', paddingBottom: 15, paddingTop: 15}}>
@@ -180,10 +181,10 @@ export default class MotorDetailScreen extends Component {
                     </View>  
                     <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center', backgroundColor: Common.titleColor, borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
                         <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={() =>this.setState({ isCreate: true})}>
-                            <Image source={require('@assets/images/motor.png')} style={{height: '100%', width: '100%', resizeMode: 'contain'}}/> 
+                            <Image source={require('@assets/images/add.png')} style={{height: '100%', width: '100%', resizeMode: 'contain'}}/> 
                         </TouchableOpacity>
                     </View>
-                </View>
+                </ImageBackground>
 
                 {/* Thêm Thông Tin Xe  */}
                 {/* <Modal
@@ -251,6 +252,7 @@ export default class MotorDetailScreen extends Component {
                         </View>      
                     </View>
                 </Modal>
+                
             </Wrapper>
         )
     }

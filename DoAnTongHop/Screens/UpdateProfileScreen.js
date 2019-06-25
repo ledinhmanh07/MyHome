@@ -32,6 +32,7 @@ export default class UpdateProfileScreen extends Component {
             textAlign:"center", 
             flex:1 
           },
+          headerRight: <View style={{flex: 0.2}}/>
     };
 
     onSaveClick = () => {

@@ -31,6 +31,7 @@ export default class RoomDetail extends Component {
             textAlign:"center", 
             flex:1 
           },
+          headerRight: <View style={{flex: 0.2}}/>
     };
 
     render() {

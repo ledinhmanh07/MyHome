@@ -16,6 +16,7 @@ export default class TabProfileScreen extends Component {
             textAlign:"center", 
             flex:1 
           },
+          headerRight: <View style={{flex: 0.2}}/>
     };
 
     onClickProfile = () => {
@@ -30,18 +31,18 @@ export default class TabProfileScreen extends Component {
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
                 <View style={{ flex: 1, alignItems: 'center'}}>
                     <View style={{flex: 2 , alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 25, fontWeight: 'bold', color: '#8B0000'}}>NHÀ TRỌ THÔNG MINH</Text>
+                        <Text style={styles.logoText}>NHÀ TRỌ THÔNG MINH</Text>
                     </View>                        
                     <View style={{flex: 4, width:'100%', height: '100%', flexDirection: 'row'}}>
                         <View style={styles.viewButton}>
                             <TouchableOpacity style={styles.button} onPress={this.onClickProfile}>
-                                <Image source={require('@assets/images/bill_import.png')} style={styles.icon}/>
+                                <Image source={require('@assets/images/profile.png')} style={styles.icon}/>
                                 <Text style={styles.textBtn} >Thông Tin Khách Trọ</Text>
                             </TouchableOpacity>  
                         </View>  
                         <View style={styles.viewButton}>
                             <TouchableOpacity style={styles.button} onPress={this.onClickMotorDetail}>
-                                <Image source={require('@assets/images/motorcycle.png')} style={styles.icon}/>   
+                                <Image source={require('@assets/images/car.png')} style={styles.icon}/>   
                                 <Text style={styles.textBtn} >Xe Gửi Trọ</Text>
                             </TouchableOpacity>
                         </View> 
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     button: { 
         height: '80%', 
         width: '80%', 
-        backgroundColor: '#FFFFFF', 
+        backgroundColor: Common.buttonColorOpacity, 
         alignItems: 'center', 
         justifyContent: 'center',  
         borderRadius: 10,
@@ -87,5 +88,18 @@ const styles = StyleSheet.create({
         color: '#000', 
         textAlign: 'center', 
         width: '80%'
-    }
+    },
+    logoText: {
+        marginBottom: 30,
+        textAlign: 'center',
+        fontSize: 25, 
+        fontWeight: 'bold', 
+        color: '#3B5998',
+        paddingHorizontal: 10,
+        paddingTop: 5,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 5,
+        borderColor: '#3B5998',
+        borderWidth: 4,
+    },
 })

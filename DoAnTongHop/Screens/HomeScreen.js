@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, SafeAreaView} from 'react-native'
+import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
+import * as Common from '@constants/Common';
 
 export default class HomeScreen extends Component {
     constructor(props){
@@ -12,8 +13,8 @@ export default class HomeScreen extends Component {
         header: null
     };
 
-    onClickRoomDetail = () => {
-        this.props.navigation.navigate('RoomDetail')
+    onClickNew = () => {
+        Alert.alert("Thông Báo","Chức năng đăng trong quá trình hoạn thiện,...!!!");
     }
     onClickBill = () => {
         this.props.navigation.navigate('BillScreen')
@@ -28,18 +29,17 @@ export default class HomeScreen extends Component {
     render() {
         return (            
             <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <View style={{ flex: 1, alignItems: 'center'}}>
-                    <View style={{flex: 1}}></View>
-                    <View style={{flex: 9 , alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 25, fontWeight: 'bold', color: '#8B0000'}}>NHÀ TRỌ THÔNG MINH</Text>
+                <View style={{ flex: 1, alignItems: 'center'}}>                    
+                    <View style={{flex: 10 , alignItems: 'center', justifyContent: 'center', marginTop: '10%'}}>
+                        <Text style={styles.logoText}>NHÀ TRỌ THÔNG MINH</Text>
                     </View>                        
                     <View style={{flex: 19, width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
                         <View style={styles.viewRowButton}>
                             <View style={styles.viewButton}>
-                                <TouchableOpacity style={styles.button} onPress={this.onClickRoomDetail}>
-                                    <Image source={require('@assets/images/house.png')} style={styles.icon}/>
-                                    <Text style={styles.textBtn} >Thông Tin Phòng</Text>
-                                </TouchableOpacity>  
+                                <TouchableOpacity style={styles.button} onPress={this.onClickNew}>
+                                    <Image source={require('@assets/images/new.png')} style={styles.icon}/>
+                                    <Text style={styles.textBtn} >Thông Báo</Text>
+                                </TouchableOpacity>
                             </View>  
                             <View style={styles.viewButton}>
                                 <TouchableOpacity style={styles.button} onPress={this.onClickProfile}>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     button: {
         height: '80%', 
         width: '80%', 
-        backgroundColor: '#FFFFFF', 
+        backgroundColor: Common.buttonColorOpacity, 
         alignItems: 'center', 
         justifyContent: 'center',  
         borderRadius: 10,        
@@ -114,5 +114,17 @@ const styles = StyleSheet.create({
         color: '#000', 
         textAlign: 'center', 
         width: '80%'
-    }
+    },
+    logoText: {
+        textAlign: 'center',
+        fontSize: 25, 
+        fontWeight: 'bold', 
+        color: '#3B5998',
+        paddingHorizontal: 10,
+        paddingTop: 5,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 5,
+        borderColor: '#3B5998',
+        borderWidth: 4,
+    },
 })

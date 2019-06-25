@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity } from 'react-native'
-import * as Common from '@constants/Common'
+import * as Common from '@constants/Common';
+import { NavigationActions } from 'react-navigation'
 
 export default class MoreScreen extends Component {
     
@@ -14,39 +15,60 @@ export default class MoreScreen extends Component {
             fontWeight: 'bold',
             alignSelf: 'center',
             textAlign:"center", 
-            flex:1 
+            flex:1,             
           },
+          headerRight: <View style={{flex: 0.2}}/>
+          
     };
 
     onClickChangePassword = () => {
-        this.props.navigation.navigate('ChangePasswordScreen')
+        this.props.navigation.navigate('ChangePasswordScreen');
     }
     onClickSupport = () => {
-        this.props.navigation.navigate('SupportScreen')
+        this.props.navigation.navigate('SupportScreen');
+    }
+    onClickLogout = () => {
+        this.props.navigation.reset([NavigationActions.navigate({ routeName: 'LoginScreen' })], 0);
+    }
+    onClickRoomDetail = () => {
+        this.props.navigation.reset('RoomDetail');
     }
 
     render() {
         return (
-            <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
-                <View style={{ flex: 1, alignItems: 'center'}}>
-                    <View style={{flex: 2 , alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 25, fontWeight: 'bold', color: '#8B0000'}}>NHÀ TRỌ THÔNG MINH</Text>
-                    </View>                        
-                    <View style={{flex: 4, width:'100%', height: '100%', flexDirection: 'row'}}>
+            <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%', flex: 1, alignItems: 'center'}}>
+                <View style={{flex: 8 , alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={styles.logoText}>NHÀ TRỌ THÔNG MINH</Text>
+                </View>       
+                <View style={{flex: 19, width:'100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={styles.viewRowButton}>
                         <View style={styles.viewButton}>
-                            <TouchableOpacity style={styles.button} onPress={this.onClickProfile}>
-                                <Image source={require('@assets/images/changePass.png')} style={styles.icon}/>
-                                <Text style={styles.textBtn} >Đổi Mật Khẩu</Text>
-                            </TouchableOpacity>  
+                            <TouchableOpacity style={styles.button} onPress={this.onClickRoomDetail}>
+                                <Image source={require('@assets/images/house.png')} style={styles.icon}/>
+                                <Text style={styles.textBtn} >Thông Tin Phòng</Text>
+                            </TouchableOpacity>
                         </View>  
                         <View style={styles.viewButton}>
-                            <TouchableOpacity style={styles.button} onPress={this.onClickMotorDetail}>
+                            <TouchableOpacity style={styles.button} onPress={this.onClickSupport}>
                                 <Image source={require('@assets/images/support.png')} style={styles.icon}/>   
-                                <Text style={styles.textBtn} >Hổ Trợ</Text>
+                                <Text style={styles.textBtn} >Hỗ Trợ</Text>
                             </TouchableOpacity>
                         </View> 
-                        
-                    </View>
+                    </View> 
+                    <View style={styles.viewRowButton}>                           
+                        <View style={styles.viewButton}>
+                            <TouchableOpacity style={styles.button} onPress={this.onClickChangePassword}>
+                                <Image source={require('@assets/images/change_password.png')} style={styles.icon}/>
+                                <Text style={styles.textBtn} >Đổi Mật Khẩu</Text>
+                            </TouchableOpacity>
+                        </View>  
+                        <View style={styles.viewButton}>
+                            <TouchableOpacity style={styles.button} onPress={this.onClickLogout}>
+                                <Image source={require('@assets/images/logout.png')} style={styles.icon}/>
+                                <Text style={styles.textBtn} >Đăng Xuất</Text>
+                            </TouchableOpacity>
+                        </View> 
+                    </View>     
                 </View>
             </ImageBackground>
         )
@@ -55,14 +77,24 @@ export default class MoreScreen extends Component {
 
 const styles = StyleSheet.create({       
     viewButton: {
+        flex: 1, 
         alignItems: 'center', 
-        width:'50%', 
-        height: '50%'
+        width:'100%', 
+        height: '100%', 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    },
+    viewRowButton: {
+        flex: 1, 
+        alignItems: 'center', 
+        width:'100%', 
+        height: '100%', 
+        flexDirection: 'row'       
     },
     button: { 
         height: '80%', 
         width: '80%', 
-        backgroundColor: '#FFFFFF', 
+        backgroundColor: Common.buttonColorOpacity, 
         alignItems: 'center', 
         justifyContent: 'center',  
         borderRadius: 10,
@@ -87,5 +119,18 @@ const styles = StyleSheet.create({
         color: '#000', 
         textAlign: 'center', 
         width: '80%'
-    }
+    },
+    logoText: {
+        marginBottom: 30,
+        textAlign: 'center',
+        fontSize: 25, 
+        fontWeight: 'bold', 
+        color: '#3B5998',
+        paddingHorizontal: 10,
+        paddingTop: 5,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 5,
+        borderColor: '#3B5998',
+        borderWidth: 4,
+    },
 })

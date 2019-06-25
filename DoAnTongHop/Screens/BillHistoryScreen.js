@@ -26,6 +26,7 @@ export default class BillHistoryScreen extends Component {
             textAlign:"center", 
             flex:1 
         },
+        headerRight: <View style={{flex: 0.2}}/>
     }
     onClick = () => {
         this.props.navigation.navigate('')

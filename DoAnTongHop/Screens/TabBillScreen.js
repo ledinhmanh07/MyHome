@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Tab, Tabs, Container, Header} from 'native-base'
+import {Tab, Tabs, Container, View} from 'native-base'
 import EnterBillScreen from '@screens/EnterBillScreen';
 import CurrentBillScreen from '@screens/CurrentBillScreen';
 import * as Common from '@constants/Common'
@@ -17,6 +17,7 @@ export default class TabBillScreen extends Component{
             textAlign:"center", 
             flex:1 
           },
+          headerRight: <View style={{flex: 0.2}}/>
       };
     
     render() {
