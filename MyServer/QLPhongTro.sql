@@ -101,6 +101,14 @@ CREATE TABLE admin (
     pass NVARCHAR(20)
 );
 
+CREATE TABLE thong_bao (
+	id_tin INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_admin INT(10) NOT NULL,
+	ngay_tao NVARCHAR(30),
+    tieu_de NVARCHAR(50) NOT NULL,
+    noi_dung NVARCHAR(200) NOT NULL,
+    FOREIGN KEY (id_admin) REFERENCES admin(id_admin)
+);
 
 ------------------------------------------------------------ 
 -- Thêm dữ liệu 'Loại Phòng'
@@ -211,8 +219,19 @@ VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_us
 INSERT INTO hoa_don ( id_hoa_don, id_phong, id_user, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, gia_nuoc, so_dien_cu, so_dien_moi, gia_dien, so_xe, gia_xe, internet, truyen_hinh_cap, ve_sinh, khac, gia_phong, tong_tien, tinh_trang )
 VALUE ( null,(SELECT id_phong FROM phong WHERE ten_phong = '301'), (SELECT id_user FROM tai_khoan_user where id_phong = (SELECT id_phong FROM phong WHERE ten_phong = '301')), '06/2019', null, 150, 182, 4000, 132, 140, 15000, 3, 150000, 120000, 0, 40000, null, 3800000, 4850000, false);
 
+
 ------------------------------------------------------------
 -- Thêm dữ liệu 'Tài Khoản ADMIN'
 
 INSERT INTO admin ( id_admin, ho_ten, ten_dn, pass )
 VALUE ( null, 'Lê Đình Mạnh', 'dinhmanh', '123456');
+
+
+------------------------------------------------------------
+-- Thêm dữ liệu 'Thông Báo'
+
+INSERT INTO thong_bao ( id_tin, id_admin, ngay_tao, tieu_de, noi_dung )
+VALUE ( null, 1, '26/06/2019', 'Tiền Phòng Tháng 6', 'Thời gian đóng tiền phòng tháng 6 bắt đầu ngày 01/07 đến ngày 05/07/2019, nếu quá hạn không đóng sẽ phụ thu 6%. Cảm ơn!!!');
+
+INSERT INTO thong_bao ( id_tin, id_admin, ngay_tao, tieu_de, noi_dung )
+VALUE ( null, 1, '26/05/2019', 'Tiền Phòng Tháng 5', 'Thời gian đóng tiền phòng tháng 5 bắt đầu ngày 01/06 đến ngày 05/06/2019, nếu quá hạn không đóng sẽ phụ thu 6%. Cảm ơn!!!');

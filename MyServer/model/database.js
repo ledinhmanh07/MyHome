@@ -17,7 +17,7 @@ function connect(callback){
 
 // Phòng
 function getPhong(callback){
-    connection.query('SELECT * FROM phong where', function (error, results, fields) {
+    connection.query('SELECT * FROM phong WHERE', function (error, results, fields) {
         if (error){
             callback(null,error)
         }
@@ -28,7 +28,7 @@ function getPhong(callback){
 // Khách trọ
 function getKhachTro(callback, params){
     console.log('params : ' + params)
-    connection.query('SELECT * FROM khach_tro where id_phong =?', params, function (error, results, fields) {
+    connection.query('SELECT * FROM khach_tro WHERE id_phong =?', params, function (error, results, fields) {
         if (error){
             callback(null,error)
         callback(results)
@@ -39,7 +39,7 @@ function getKhachTro(callback, params){
 
 function getKhachTro1(callback, params){
     console.log('params : ' + params)
-    let query = `SELECT * FROM khach_tro where id =` + params
+    let query = `SELECT * FROM khach_tro WHERE id =` + params
     console.log('query : ' + query)
     connection.query(query, function (error, results, fields) {
         if (error){
@@ -106,7 +106,7 @@ function deleteProfile(callback, params){
 // Hóa đơn
 function getHoaDon(callback, params){
     console.log('params : ' + params)
-    connection.query('SELECT * FROM hoa_don where id_phong =? AND ngay_lap IS NOT NULL order by id_hoa_don desc', params, function (error, results, fields) {
+    connection.query('SELECT * FROM hoa_don WHERE id_phong =? AND ngay_lap IS NOT NULL ORDER BY id_hoa_don desc', params, function (error, results, fields) {
         if (error){
             callback(null,error)
         }
@@ -116,7 +116,7 @@ function getHoaDon(callback, params){
 
 function getHoaDonMoi(callback, params){
     console.log('params : ' + params)
-    connection.query('SELECT * FROM hoa_don where id_phong =? order by id_hoa_don desc limit 1', params, function (error, results, fields) {
+    connection.query('SELECT * FROM hoa_don WHERE id_phong =? ORDER BY id_hoa_don desc limit 1', params, function (error, results, fields) {
         if (error){
             callback(null,error)
         }
@@ -126,7 +126,7 @@ function getHoaDonMoi(callback, params){
 
 function getDienNuoc(callback, params){
     console.log('params : ' + params)
-    connection.query('SELECT id_hoa_don, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, so_dien_cu, so_dien_moi FROM hoa_don WHERE id_phong =? order by id_hoa_don desc LIMIT 1', params, function (error, results, fields) {
+    connection.query('SELECT id_hoa_don, hoa_don_thang, ngay_lap, so_nuoc_cu, so_nuoc_moi, so_dien_cu, so_dien_moi FROM hoa_don WHERE id_phong =? ORDER BY id_hoa_don desc LIMIT 1', params, function (error, results, fields) {
         if (error){
             callback(null,error)
         }
@@ -176,7 +176,31 @@ function getBangGia(callback, params){
 // Tài khoản
 function testTaiKhoan(callback, params){
     console.log('params : ' + params)
-    let query = `SELECT * FROM tai_khoan_user where ten_dn=` + `'` + params.userName + `'` + ` and pass = `+ `'` + params.pass+ `'` 
+    let query = `SELECT * FROM tai_khoan_user WHERE ten_dn=` + `'` + params.userName + `'` + ` AND pass = `+ `'` + params.pass+ `'` 
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+function testPassword(callback, params){
+    console.log('params : ' + params)
+    let query = `SELECT pass FROM tai_khoan_user WHERE id_user=` + `'` + params.id_user + `'` + ` AND pass = `+ `'` + params.pass+ `'` 
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error){
+            callback(null,error)
+        }
+        callback(results)
+    });
+}
+
+function changePassword(callback, params){
+    console.log('params : ' + params)
+    let query = `UPDATE tai_khoan_user SET pass = '` + params.pass + `' WHERE id_user=` + `'` + params.userName + `'`
     console.log('query : ' + query)
     connection.query(query, function (error, results, fields) {
         if (error){
@@ -252,6 +276,36 @@ function deleteMotor(callback, params){
     });
 }
 
+//Thông báo
+
+function getThongBaoMoi(callback, params){
+    let query = `SELECT * FROM thong_bao ORDER BY id_tin desc limit 1`  
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error !== null){
+            console.log('error : ' + error)
+            callback(null,error)
+            return
+        }        
+        console.log('results : ' + results)
+        callback(results, null)
+    });
+}
+
+function getThongBao(callback, params){
+    let query = `SELECT * FROM thong_bao ORDER BY id_tin desc limit 10`  
+    console.log('query : ' + query)
+    connection.query(query, function (error, results, fields) {
+        if (error !== null){
+            console.log('error : ' + error)
+            callback(null,error)
+            return
+        }        
+        console.log('results : ' + results)
+        callback(results, null)
+    });
+}
+
 module.exports = {
     connection:connection,
     connect:connect,
@@ -272,4 +326,8 @@ module.exports = {
     updateMotor:updateMotor,
     deleteMotor:deleteMotor,
     updateDienNuoc:updateDienNuoc,
+    getThongBaoMoi:getThongBaoMoi,
+    getThongBao:getThongBao,
+    testPassword:testPassword,
+    changePassword:changePassword
 }

@@ -17,8 +17,7 @@ export default class MoreScreen extends Component {
             textAlign:"center", 
             flex:1,             
           },
-          headerRight: <View style={{flex: 0.2}}/>
-          
+          headerRight: <View/>          
     };
 
     onClickChangePassword = () => {
@@ -31,7 +30,7 @@ export default class MoreScreen extends Component {
         this.props.navigation.reset([NavigationActions.navigate({ routeName: 'LoginScreen' })], 0);
     }
     onClickRoomDetail = () => {
-        this.props.navigation.reset('RoomDetail');
+        this.props.navigation.navigate('RoomDetail');
     }
 
     render() {

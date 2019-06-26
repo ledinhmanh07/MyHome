@@ -46,10 +46,7 @@ export default class CreateProfileScreen extends Component {
                     this.state.hktt.length == 0 || this.state.nam_sinh.length == 0 || this.state.nghe_nghiep.length == 0){
                         Alert.alert("Bạn phải nhập đầy đủ thông tin,...!!!")
                     }
-                    else{
-                        this.setState({
-                            visible: true
-                        })  
+                    else{ 
                         this.createProfile()
                     }    
               }},              
@@ -78,9 +75,9 @@ export default class CreateProfileScreen extends Component {
     
         await axios.post( ApiConfig.LINK + 'createProfile', {data},{headers})
         .then(response => {
-            let result = response.data
+            let result = response.data;
             console.log(result);
-            if(result){
+            if(result){                
                 Alert.alert('Thêm dữ liệu thành công!!!')
                 this.props.navigation.goBack()   
             }
@@ -88,9 +85,6 @@ export default class CreateProfileScreen extends Component {
             {
                 Alert.alert('Thêm dữ liệu không thành công!!!')
             }
-            this.setState({
-                visible: false
-            })  
         })
         .catch(error => {
                 console.log(error);

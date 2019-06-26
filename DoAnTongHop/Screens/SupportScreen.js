@@ -12,7 +12,6 @@ export default class SupportScreen extends Component {
         this.setState({ likes: likes })
     }
     onClick = () =>{
-        this.props.navigation.navigate('CarScreen', {likes: 5 })
     }
     render() {
         return (

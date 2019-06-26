@@ -23,15 +23,15 @@ export default class MotorDetailScreen extends Component {
         title: 'Thông Tin',
         headerStyle: {
             backgroundColor: Common.titleColor,   
-          },
-          headerTintColor: '#ffffff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            alignSelf: 'center',
-            textAlign:"center", 
-            flex:1 
-          },
-          headerRight: <View style={{flex: 0.2}}/>
+        },
+        headerTintColor: '#ffffff',
+        headerTitleStyle: {
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        textAlign:"center", 
+        flex:1 
+        },
+        headerRight: <View style={{flex: 0.2}}/>
     };
 
     // onClickUpdateProfile = (id) => {
@@ -160,11 +160,11 @@ export default class MotorDetailScreen extends Component {
                                 {this.state.profile.map( (item) =>{
                                     return (
                                         <View style={styles.profile} key={item.id_xe}>                                            
-                                            <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>      
-                                                <Text style={{fontSize: Common.labelSize, fontWeight: 'bold', marginBottom: 5}}>{item.so_xe}</Text>                                          
-                                                <Text style={{fontSize: Common.textSizeInput, width: '95%', textAlign: "center"}}>Mô tả: {item.mo_ta}</Text>
+                                            <View style={{width: '90%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>      
+                                                <Text style={{fontSize: Common.labelSize, fontWeight: 'bold', marginVertical: 10}}>{item.so_xe}</Text>                                          
+                                                <Text style={{fontSize: Common.textSizeInput, width: '95%', textAlign: "center", marginBottom: 10}}>Mô tả: {item.mo_ta}</Text>
                                             </View>
-                                            <View style={{flex:2, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
+                                            <View style={{flexDirection: 'row', width: '90%', justifyContent : 'center', alignItems: 'center', marginVertical: 5}}>
                                                 <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onClickUpdateMotor(item.id_xe, item.so_xe, item.mo_ta)}>
                                                     <Text style={{fontSize: Common.textSizeInput, color: '#000000'}} >Sửa</Text>
                                                 </TouchableOpacity>  
@@ -260,7 +260,7 @@ export default class MotorDetailScreen extends Component {
     componentDidMount = () => {
         this.setState({
             visible: true
-        }) 
+        });
         this.fetchMotorDetail();
     }
     
@@ -302,7 +302,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white', 
         width: '80%', 
-        height: 120, 
         borderRadius: 10, 
         marginTop: 15,         
         shadowColor: '#000000', 

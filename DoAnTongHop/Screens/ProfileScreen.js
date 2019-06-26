@@ -46,9 +46,6 @@ export default class ProfileScreen extends Component {
             'Bạn có muốn xóa thông tin này,...???',
             [
               {text: 'Xóa', onPress: () =>{
-                    this.setState({
-                        visible: true
-                    })
                     this.deleteProfile()
               }},              
               {text: 'Hủy', onPress: () => console.log('Hủy xóa thông tin')},
@@ -79,10 +76,7 @@ export default class ProfileScreen extends Component {
             else
             {
                 Alert.alert('Xóa dữ liệu không thành công!!!')
-            }
-            this.setState({
-                visible: false
-            })
+            }            
         })
         .catch(error => {
                 console.log(error);
@@ -100,14 +94,14 @@ export default class ProfileScreen extends Component {
                                 {this.state.profile.map( (item) =>{
                                     return (
                                         <View style={styles.profile} key={item.id}>
-                                            <View style={{flex: 5, width: '90%', height: '100%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>
-                                                <Text style={{fontSize: Common.labelSize,  fontWeight: 'bold', marginBottom: 5}}>{item.ho_ten} ({item.nghe_nghiep})</Text>
+                                            <View style={{width: '90%', borderBottomWidth: 0.5, justifyContent : 'center', alignItems: 'center'}}>
+                                                <Text style={{fontSize: Common.labelSize,  fontWeight: 'bold', marginVertical: 10}}>{item.ho_ten} ({item.nghe_nghiep})</Text>
                                                 <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>Giới tính: {item.gioi_tinh}</Text>
-                                                <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>Ngày sinh: {item.ngay_sinh}</Text>
+                                                <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>Ngày sinh: {item.nam_sinh}</Text>
                                                 <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>CMND: {item.cmnd}</Text>
-                                                <Text style={{fontSize: Common.textSizeInput, width: '100%'}}>HKTT: {item.hktt}</Text>
+                                                <Text style={{fontSize: Common.textSizeInput, width: '100%', marginBottom: 10}}>HKTT: {item.hktt}</Text>
                                             </View>
-                                            <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
+                                            <View style={{flexDirection: 'row', width: '90%', justifyContent : 'center', alignItems: 'center', marginVertical: 5}}>
                                                 <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onClickUpdateProfile(item.id)}>
                                                     <Text style={{fontSize: Common.textSizeInput, color: '#000000'}} >Sửa</Text>
                                                 </TouchableOpacity>  
@@ -174,11 +168,9 @@ export default class ProfileScreen extends Component {
 
 const styles = StyleSheet.create({       
     profile: {
-        flex: 1,
         alignItems: 'center',
         backgroundColor: 'white', 
-        width: '90%', 
-        height: 180, 
+        width: '90%',
         borderRadius: 10, 
         marginTop: 15,         
         shadowColor: '#000000', 

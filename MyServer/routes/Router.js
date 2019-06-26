@@ -71,11 +71,6 @@ Router.post('/api/getDienNuoc',(req,res)=>{
 })
 Router.post('/api/updateDienNuoc',(req,res)=>{
     console.log(req.body)
-    // let dienNuoc = {
-    //     "id_hoa_don": req.body.data.id_hoa_don,
-    //     "so_nuoc_moi": req.body.data.so_nuoc_moi,
-    //     "so_dien_moi": req.body.data.so_dien_moi,        
-    // }
     db.updateDienNuoc((result,err)=>{
         if(err !== null){            
             console.log('Lỗi : '+err)  
@@ -95,6 +90,36 @@ Router.post('/api/testTaiKhoan',(req,res)=>{
             return;
         }
         console.log(result)      
+        res.json(result)
+    },req.body.data)
+})
+
+Router.post('/api/changePassword',(req,res)=>{    
+    console.log(req.body)
+    db.changePassword((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)      
+        res.json(result)
+    },req.body.data)
+})
+
+Router.post('/api/testPassword',(req,res)=>{    
+    console.log(req.body)
+    db.testPassword((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)  
+        if(result.length !== 0){
+            res.json(true)
+        }    
+        else {
+            res.json(false)
+        }
         res.json(result)
     },req.body.data)
 })
@@ -208,6 +233,27 @@ Router.post('/api/deleteMotor',(req,res)=>{
         console.log(result)      
         res.json(true)
     },req.body.data.id_xe)
+})
+
+Router.get('/api/getThongBaoMoi',(req,res)=>{    
+    db.getThongBaoMoi((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result)
+    },{})
+})
+Router.get('/api/getThongBao',(req,res)=>{    
+    db.getThongBao((result,err)=>{
+        if(err){
+            res.json(err)
+            return;
+        }
+        console.log(result)
+        res.json(result)
+    },{})
 })
 
 module.exports = Router

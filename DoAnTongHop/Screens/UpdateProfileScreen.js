@@ -41,13 +41,10 @@ export default class UpdateProfileScreen extends Component {
             'Cập nhập thông tin',
             'Bạn có muốn cập nhập thông tin này,...???',
             [
-              {text: 'Cập nhập', onPress: () =>{
-                this.setState({
-                    visible: false
-                })
-                this.updateProfile()
-              }},              
-              {text: 'Hủy', onPress: () => console.log('Hủy cập nhập')},
+                {text: 'Cập nhập', onPress: () =>{
+                    this.updateProfile()
+                }},              
+                {text: 'Hủy', onPress: () => console.log('Hủy cập nhập')},
             ],
             {cancelable: false},
           );
@@ -82,9 +79,6 @@ export default class UpdateProfileScreen extends Component {
             {
                 Alert.alert('Cập nhập dữ liệu không thành công!!!')
             }
-            this.setState({
-                visible: false
-            })
         })
         .catch(error => {
                 console.log(error);

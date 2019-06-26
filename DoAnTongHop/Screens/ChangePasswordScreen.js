@@ -4,59 +4,75 @@ import axios from 'axios'
 import * as Common from '@constants/Common'
 import * as ApiConfig from '@constants/ApiConfig'
 import Wrapper from './Loading'
-export default class LoginScreen extends Component {
+export default class ChangePasswordScreen extends Component {
     constructor(props){
         super(props)
-        global.idPhong = ''
-        global.idUser = ''
         this.state = {
-            idPhong : '',
-            userName: '',
             pass: '',
+            newPass: '',
+            newPassLast: '',
             visible: false
         }
     }
 
     static navigationOptions = {
-        title: 'Welcome Screen',
-        header: null
+        title: 'Đổi Mật Khẩu',
+        headerStyle: {
+            backgroundColor: Common.titleColor,   
+          },
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignSelf: 'center',
+            textAlign:"center", 
+            flex:1,             
+          },
+          headerRight: <View style={{flex: 0.2}}/>
+          
     };
 
-    onClickLogIn = () => {
-        if(this.state.userName !== ''|| this.state.pass !== ''){
-            this.setState({
-                visible: true
-            })
-            this.testUserID();
+    onClickChangePassword = () => {
+        if(this.state.newPassLast !== ''|| this.state.pass !== '' || this.state.newPass !== ''){
+            if(this.state.newPassLast === this.state.newPass) {
+                    if(this.state.pass !== this.state.newPass) {
+                    this.setState({
+                        visible: true
+                    })
+                    this.testPassword();
+                }
+                else {
+                    Alert.alert("Đổi Mật Khẩu Không Thành Công","Mật khẩu mới phải khác Mật khẩu cũ,...!!!")
+                }
+            }
+            else {
+                Alert.alert("Đổi Mật Khẩu Không Thành Công","Mật khẩu mới và Mật khẩu nhập lại phải giống nhau,...!!!")
+            }    
         }
         else{
-            Alert.alert("Đăng nhập thất bại","Bạn chưa nhập Tên Tài Khoản hoặc Mật Khẩu,...!!!")
+            Alert.alert("Đổi Mật Khẩu Không Thành Công","Bạn chưa nhập đủ thông tin để đổi mật khẩu,...!!!")
         }
     }
     
-    testUserID = async() => {
+    testPassword = async() => {
         let headers = {
             'Content-Type': 'application/json',
             // 'Authorization': 'JWT ...' 
         }
         
         let data = {
-            "userName": this.state.userName,
-            "pass": this.state.pass
+            "pass": this.state.pass,
+            "idUser": global.idUser
         }
     
-        await axios.post( ApiConfig.LINK + 'testTaiKhoan', {data},{headers})
+        await axios.post( ApiConfig.LINK + 'testPassword', {data},{headers})
         .then(response => {
             let userID = response.data
             console.log(userID);
-            if(userID.length!=0){
-                global.idPhong = userID[0].id_phong
-                global.idUser = userID[0].id_user
-                console.log('ID phòng là: '+global.idPhong+' - ID User: ' + global.idUser)                
-                this.props.navigation.replace('HomeScreen')      
+            if(!userID){
+                Alert.alert('Mật khẩu cũ nhập không chính xác!!!')
             }      
             else{
-                Alert.alert('Tên đăng nhập hoặc tài khoản không đúng!!!')
+                this.props.navigation.replace('HomeScreen')
             }         
             
         })
@@ -83,27 +99,30 @@ export default class LoginScreen extends Component {
         return (
             <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>              
                 <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.logoText}>NHÀ TRỌ THÔNG MINH</Text>
                     <TextInput                            
-                        placeholder='Tên Đăng Nhập'
+                        placeholder='Mật Khẩu Cũ,...'
                         placeholderTextColor = '#AAAAAA'
                         style={styles.textInput}
-                        onChangeText={(text) => this.setState({userName : text})}
+                        onChangeText={(text) => this.setState({pass : text})}
+                    />
+                    <TextInput                            
+                        placeholder='Mật Khẩu Mới,...'
+                        placeholderTextColor = '#AAAAAA'
+                        style={styles.textInput}
+                        keyboardType="default"
+                        onChangeText={(text) => this.setState({newPass : text})}
                     />
                     <TextInput
-                        placeholder='Mật Khẩu'
+                        placeholder='Nhập Lại Mật Khẩu Mới,...'
                         placeholderTextColor = '#AAAAAA'
                         style={styles.textInput}
                         secureTextEntry={true}
                         keyboardType="default"
-                        onChangeText={(text) => this.setState({ pass: text})}
+                        onChangeText={(text) => this.setState({ newPassLast: text})}
                     />       
-                    <TouchableOpacity style={styles.button} onPress={this.onClickLogIn}>
-                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF'}} >ĐĂNG NHẬP</Text>
-                    </TouchableOpacity>  
-                    <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginTop: 5}} onPress={this.onClick}>
-                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', textDecorationLine: 'underline'}} >Quên mật khẩu!</Text>
-                    </TouchableOpacity>                              
+                    <TouchableOpacity style={styles.button} onPress={this.onClickChangePassword}>
+                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF'}} >Đổi Mật Khẩu</Text>
+                    </TouchableOpacity>                         
                 </ImageBackground>              
             </Wrapper>
         )
@@ -138,18 +157,5 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         alignItems: 'center', 
         justifyContent: 'center'
-    },
-    logoText: {
-        marginBottom: 60,
-        textAlign: 'center',
-        fontSize: 25, 
-        fontWeight: 'bold', 
-        color: '#3B5998',
-        paddingHorizontal: 10,
-        paddingTop: 5,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 5,
-        borderColor: '#3B5998',
-        borderWidth: 4,
-    },
+    }
 })

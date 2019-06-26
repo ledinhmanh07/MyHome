@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import * as Common from '@constants/Common';
+import axios from 'axios';
+import * as ApiConfig from '@constants/ApiConfig';
 
 export default class HomeScreen extends Component {
     constructor(props){
@@ -14,16 +16,16 @@ export default class HomeScreen extends Component {
     };
 
     onClickNew = () => {
-        Alert.alert("Thông Báo","Chức năng đăng trong quá trình hoạn thiện,...!!!");
+        this.props.navigation.navigate('NewsScreen');
     }
     onClickBill = () => {
-        this.props.navigation.navigate('BillScreen')
+        this.props.navigation.navigate('BillScreen');
     }
     onClickProfile = () => {
-        this.props.navigation.navigate('TabProfileScreen')
+        this.props.navigation.navigate('TabProfileScreen');
     }
     onClickMore = () => {
-        this.props.navigation.navigate('MoreScreen')
+        this.props.navigation.navigate('MoreScreen');
     }
 
     render() {
@@ -66,6 +68,32 @@ export default class HomeScreen extends Component {
                     <View style={{flex: 1}}></View>
                 </View>
             </ImageBackground>
+        )
+    }
+    componentDidMount = () => {
+        this.fetchProfile();
+    }
+    
+    fetchProfile = async() => {
+    
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...' 
+        }
+    
+        await axios.get(
+             ApiConfig.LINK + 'getThongBaoMoi', {headers}
+        )
+        .then(response => {
+            let thongBao = response.data
+            if(thongBao.length !== 0){
+                console.log('Thông Báo: '+thongBao[0]);
+                Alert.alert(thongBao[0].tieu_de, thongBao[0].noi_dung);
+            }
+        })
+        .catch(error => {
+                console.log(error);
+            }
         )
     }
 }
