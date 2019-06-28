@@ -188,7 +188,7 @@ function testTaiKhoan(callback, params){
 
 function testPassword(callback, params){
     console.log('params : ' + params)
-    let query = `SELECT pass FROM tai_khoan_user WHERE id_user=` + `'` + params.id_user + `'` + ` AND pass = `+ `'` + params.pass+ `'` 
+    let query = `SELECT pass FROM tai_khoan_user WHERE id_user= ` + params.idUser + ` AND pass = '` + params.pass+ `'` 
     console.log('query : ' + query)
     connection.query(query, function (error, results, fields) {
         if (error){
@@ -200,13 +200,13 @@ function testPassword(callback, params){
 
 function changePassword(callback, params){
     console.log('params : ' + params)
-    let query = `UPDATE tai_khoan_user SET pass = '` + params.pass + `' WHERE id_user=` + `'` + params.userName + `'`
+    let query = `UPDATE tai_khoan_user SET pass = '` + params.newPass + `' WHERE id_user= ` + params.idUser + ` AND pass = '` + params.pass+ `'` 
     console.log('query : ' + query)
     connection.query(query, function (error, results, fields) {
         if (error){
-            callback(null,error)
+            callback(null, error)
         }
-        callback(results)
+        callback(results, null)
     });
 }
 

@@ -97,12 +97,13 @@ Router.post('/api/testTaiKhoan',(req,res)=>{
 Router.post('/api/changePassword',(req,res)=>{    
     console.log(req.body)
     db.changePassword((result,err)=>{
-        if(err){
-            res.json(err)
+        if(err !== null){            
+            console.log('Lỗi : '+err)  
+            res.send(false)   
             return;
         }
         console.log(result)      
-        res.json(result)
+        res.json(true)
     },req.body.data)
 })
 
@@ -115,12 +116,13 @@ Router.post('/api/testPassword',(req,res)=>{
         }
         console.log(result)  
         if(result.length !== 0){
-            res.json(true)
+            res.send(true)  
+            return;
         }    
         else {
-            res.json(false)
+            res.send(false)  
+            return;
         }
-        res.json(result)
     },req.body.data)
 })
 

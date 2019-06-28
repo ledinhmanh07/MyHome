@@ -40,7 +40,7 @@ export default class RoomDetail extends Component {
                 <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%'}}>
                     <ScrollView contentContainerStyle={{flexGrow: 1, alignItems: 'center'}} >       
                         <View style={{width: '70%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#008080'}}>
-                            <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20, marginTop: 20}}>PHÒNG: {this.state.ten_phong}</Text>
+                            <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 20, marginTop: 20, color: '#ffffff', }}>PHÒNG: {this.state.ten_phong}</Text>
                         </View>   
                         <View style={{ alignItems: 'center', width: '100%', paddingBottom: 20, paddingTop: 20}}>
                             <Text style={styles.text}>Loại phòng: {this.state.ten_loai}</Text>

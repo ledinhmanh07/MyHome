@@ -18,7 +18,7 @@ export default class ChangePasswordScreen extends Component {
     static navigationOptions = {
         title: 'Đổi Mật Khẩu',
         headerStyle: {
-            backgroundColor: Common.titleColor,   
+            backgroundColor: Common.titleColor,
           },
           headerTintColor: '#ffffff',
           headerTitleStyle: {
@@ -69,10 +69,13 @@ export default class ChangePasswordScreen extends Component {
             let userID = response.data
             console.log(userID);
             if(!userID){
+                this.setState({
+                    visible: false
+                })
                 Alert.alert('Mật khẩu cũ nhập không chính xác!!!')
             }      
             else{
-                this.props.navigation.replace('HomeScreen')
+                this.changePassword();
             }         
             
         })
@@ -82,17 +85,37 @@ export default class ChangePasswordScreen extends Component {
         )
     }
 
-    offVisible = () => {
-        this.setState({
-            visible: false,
-            userName: 'hello'
-        })   
-    }
-
-    onClick = () => {
-        // this.props.navigation.replace('SupportScreen')
-        //Alert.alert('Thông báo', 'Vui lòng liên hệ với ADMIN để cấp lại mật khẩu,...!!!')
-        this.props.navigation.replace('HomeScreen')     
+    changePassword = async() => {
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...' 
+        }
+        
+        let data = {
+            "pass": this.state.pass,
+            "idUser": global.idUser,
+            "newPass" : this.state.newPass
+        }
+    
+        await axios.post( ApiConfig.LINK + 'changePassword', {data},{headers})
+        .then(response => {
+            let userID = response.data
+            console.log(userID);
+            if(!userID){
+                Alert.alert( 'Xãy ra lỗi', 'Cập nhập không thành công!!!')
+            }      
+            else{
+                Alert.alert( 'Cập nhập thành công!!!')
+            }   
+            this.setState({
+                visible: false
+            })      
+            
+        })
+        .catch(error => {
+                console.log(error);
+            }
+        )
     }
 
     render() {
@@ -103,12 +126,15 @@ export default class ChangePasswordScreen extends Component {
                         placeholder='Mật Khẩu Cũ,...'
                         placeholderTextColor = '#AAAAAA'
                         style={styles.textInput}
+                        secureTextEntry={true}
+                        keyboardType="default"
                         onChangeText={(text) => this.setState({pass : text})}
                     />
                     <TextInput                            
                         placeholder='Mật Khẩu Mới,...'
                         placeholderTextColor = '#AAAAAA'
                         style={styles.textInput}
+                        secureTextEntry={true}
                         keyboardType="default"
                         onChangeText={(text) => this.setState({newPass : text})}
                     />
