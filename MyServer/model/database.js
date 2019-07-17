@@ -246,8 +246,8 @@ function createMotor(callback, params){
 function updateMotor(callback, params){
     console.log('params : ' + params)
     let query = `UPDATE ql_xe SET ` 
-        + `so_xe = '` + params.ho_ten + `', `
-        + `mo_ta = '` + params.gioi_tinh + `' `
+        + `so_xe = '` + params.so_xe + `', `
+        + `mo_ta = '` + params.mo_ta + `' `
         + `WHERE id_xe = `+ params.id_xe
     console.log('query : ' + query)
     connection.query(query, function (error, results, fields) {

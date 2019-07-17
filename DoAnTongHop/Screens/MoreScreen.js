@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, ImageBackground ,Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import * as Common from '@constants/Common';
 import { NavigationActions } from 'react-navigation'
 
@@ -24,7 +24,8 @@ export default class MoreScreen extends Component {
         this.props.navigation.navigate('ChangePasswordScreen');
     }
     onClickSupport = () => {
-        this.props.navigation.navigate('SupportScreen');
+        // this.props.navigation.navigate('SupportScreen');
+        Alert.alert("Thông báo","Chức năng hiện tại chưa được hoàn thiện, vui lòng chờ bản cập nhập tiếp theo,...!!!");
     }
     onClickLogout = () => {
         this.props.navigation.reset([NavigationActions.navigate({ routeName: 'LoginScreen' })], 0);

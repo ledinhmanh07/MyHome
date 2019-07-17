@@ -5,11 +5,11 @@ import axios from 'axios';
 import * as ApiConfig from '@constants/ApiConfig';
 
 export default class HomeScreen extends Component {
-    constructor(props){
-        super(props);
-        global.idPhong = 4;
-        global.idUser = 1;
-    }
+    // constructor(props){
+    //     super(props);
+    //     global.idPhong = 4;
+    //     global.idUser = 1;
+    // }
     static navigationOptions = {
         title: 'Welcome Screen',
         header: null

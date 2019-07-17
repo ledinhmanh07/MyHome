@@ -103,14 +103,14 @@ export default class MotorDetailScreen extends Component {
         )
     }
 
-    // onPressUpdateMotor = (id_xe, so_xe, mo_ta) => {
-    //     this.setState ({
-    //         id_xe : id_xe,
-    //         so_xe: so_xe,
-    //         mo_ta: mo_ta,
-    //         isUpdate: true
-    //     })
-    // }
+    onPressUpdateMotor = (id_xe, so_xe, mo_ta) => {
+        this.setState ({
+            id_xe : id_xe,
+            so_xe: so_xe,
+            mo_ta: mo_ta,
+            isUpdate: true
+        })
+    }
 
     onClickUpdateMotor = () => {
         Alert.alert(
@@ -136,41 +136,41 @@ export default class MotorDetailScreen extends Component {
         )
     }
 
-    // updateMotor = async() => {
+    updateMotor = async() => {
 
-    //     let headers = {
-    //         'Content-Type': 'application/json',
-    //         // 'Authorization': 'JWT ...'
-    //     }
+        let headers = {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'JWT ...'
+        }
         
-    //     let data = {
-    //         "id_xe": this.state.id_xe,
-    //         "so_xe": this.state.so_xe,
-    //         "mo_ta": this.state.mo_ta
-    //     }
+        let data = {
+            "id_xe": this.state.id_xe,
+            "so_xe": this.state.so_xe,
+            "mo_ta": this.state.mo_ta
+        }
     
-    //     await axios.post( ApiConfig.LINK + 'updateMotor', {data},{headers})
-    //     .then(response => {
-    //         let result = response.data
-    //         console.log(result);
-    //         if(result){
-    //             Alert.alert('Cập nhập dữ liệu thành công!!!');
-    //             this.setState({ isUpdate: false});
-    //             this.fetchMotorDetail();  
-    //         }
-    //         else
-    //         {
-    //             Alert.alert('Cập nhập dữ liệu không thành công!!!');
-    //         }     
-    //         this.setState({
-    //             visible: false
-    //         }) 
-    //     })
-    //     .catch(error => {
-    //             console.log(error);
-    //         }
-    //     )
-    // }
+        await axios.post( ApiConfig.LINK + 'updateMotor', {data},{headers})
+        .then(response => {
+            let result = response.data
+            console.log(result);
+            if(result){
+                Alert.alert('Cập nhập dữ liệu thành công!!!');
+                this.setState({ isUpdate: false});
+                this.fetchMotorDetail();  
+            }
+            else
+            {
+                Alert.alert('Cập nhập dữ liệu không thành công!!!');
+            }     
+            this.setState({
+                visible: false
+            }) 
+        })
+        .catch(error => {
+                console.log(error);
+            }
+        )
+    }
 
     onClickDeleteMotor = (id_xe) => {
         console.log(id_xe)
@@ -254,14 +254,14 @@ export default class MotorDetailScreen extends Component {
                         </ScrollView>  
                     </View>  
                     <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center', backgroundColor: Common.titleColor, borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
-                        <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={this.onPressCreateMotor()}>
+                        <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={() => this.onPressCreateMotor()}>
                             <Image source={require('@assets/images/add.png')} style={{height: '100%', width: '100%', resizeMode: 'contain'}}/> 
                         </TouchableOpacity>
                     </View>
                 </ImageBackground>
 
                 {/* Thêm Thông Tin Xe  */}
-                {/* <Modal
+                <Modal
                     visible={this.state.isCreate}
                     presentationStyle="overFullScreen"
                     animationType="slide"
@@ -302,7 +302,7 @@ export default class MotorDetailScreen extends Component {
                             </View>
                         </View>      
                     </View>
-                </Modal> */}
+                </Modal>
 
                 {/* Sửa Thông Tin Xe */} 
                 <Modal
@@ -323,6 +323,7 @@ export default class MotorDetailScreen extends Component {
                                         placeholder='Số xe,...'
                                         placeholderTextColor = '#777777'
                                         style={styles.input}
+                                        value={this.state.so_xe}
                                         onChangeText={(text) => this.setState({ so_xe : text })}
                                     />
                                 </View>
@@ -332,6 +333,7 @@ export default class MotorDetailScreen extends Component {
                                         placeholder='Mô tả,...'
                                         placeholderTextColor = '#777777'
                                         style={styles.input}
+                                        value={this.state.mo_ta}
                                         onChangeText={(text) => this.setState({ mo_ta: text})}
                                     />  
                                 </View>                            

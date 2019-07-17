@@ -64,6 +64,7 @@ export default class LoginScreen extends Component {
                 console.log(error);
             }
         )
+        this.offVisible();
     }
 
     offVisible = () => {
@@ -82,28 +83,36 @@ export default class LoginScreen extends Component {
     render() {
         return (
             <Wrapper  isLoading = {this.state.visible} customStyle = {styles.loading}>              
-                <ImageBackground source={require('@assets/images/background.png')} style={{width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.logoText}>NHÀ TRỌ THÔNG MINH</Text>
-                    <TextInput                            
-                        placeholder='Tên Đăng Nhập'
-                        placeholderTextColor = '#AAAAAA'
-                        style={styles.textInput}
-                        onChangeText={(text) => this.setState({userName : text})}
-                    />
-                    <TextInput
-                        placeholder='Mật Khẩu'
-                        placeholderTextColor = '#AAAAAA'
-                        style={styles.textInput}
-                        secureTextEntry={true}
-                        keyboardType="default"
-                        onChangeText={(text) => this.setState({ pass: text})}
-                    />       
-                    <TouchableOpacity style={styles.button} onPress={this.onClickLogIn}>
-                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF'}} >ĐĂNG NHẬP</Text>
-                    </TouchableOpacity>  
-                    <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginTop: 5}} onPress={this.onClick}>
-                        <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', textDecorationLine: 'underline'}} >Quên mật khẩu!</Text>
-                    </TouchableOpacity>                              
+                <ImageBackground source={require('@assets/images/background.png')} style={{flex: 1, width: '100%', height: '100%'}}>
+                    <View style={{flex:5, width: '100%', height: '100%', justifyContent: 'flex-end', alignItems: 'center'}}>
+                        <Text style={styles.logoText}>NHÀ TRỌ THÔNG MINH</Text>
+                    </View>
+                    <View style={{flex:5, width: '100%', height: '100%', alignItems: 'center'}}>
+                        <TextInput                            
+                            placeholder='Tên Đăng Nhập'
+                            placeholderTextColor = '#AAAAAA'
+                            style={styles.textInput}
+                            onChangeText={(text) => this.setState({userName : text})}
+                        />
+                        <TextInput
+                            placeholder='Mật Khẩu'
+                            placeholderTextColor = '#AAAAAA'
+                            style={styles.textInput}
+                            secureTextEntry={true}
+                            keyboardType="default"
+                            onChangeText={(text) => this.setState({ pass: text})}
+                        />       
+                        <TouchableOpacity style={styles.button} onPress={this.onClickLogIn}>
+                            <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF'}} >ĐĂNG NHẬP</Text>
+                        </TouchableOpacity>  
+                        <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginTop: 5}} onPress={this.onClick}>
+                            <Text style={{fontSize: Common.textSizeInput, color: '#FFFFFF', textDecorationLine: 'underline'}} >Quên mật khẩu!</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{flex: 2, alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 10}}>
+                        <Text style={{fontSize: 12}}>Designer: ledinhmanh07@gmail.com</Text>
+                        <Text style={{fontSize: 12}}>© 2015 - 2019</Text>
+                    </View>
                 </ImageBackground>              
             </Wrapper>
         )
