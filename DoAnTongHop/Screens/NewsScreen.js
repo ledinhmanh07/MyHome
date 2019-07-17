@@ -59,10 +59,10 @@ export default class NewsScreen extends Component {
         this.setState({
             visible: true
         })
-        this.fetchnews();
+        this.fetchNews();
     }
     
-    fetchnews = async() => {
+    fetchNews = async() => {
     
         let headers = {
             'Content-Type': 'application/json',

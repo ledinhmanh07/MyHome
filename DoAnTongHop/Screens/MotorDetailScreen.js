@@ -32,16 +32,21 @@ export default class MotorDetailScreen extends Component {
         flex:1 
         },
         headerRight: <View style={{flex: 0.2}}/>
-    };
+    };  
 
-    // onClickUpdateProfile = (id) => {
-    //     this.props.navigation.navigate('UpdateProfileScreen', {id : id})
-    // }
+    onPressCreateMotor = () => {
+        this.setState ({
+            id_xe : 0,
+            so_xe: '',
+            mo_ta: '',
+            isCreate:true
+        })
+    }
     
     onClickCreateMotor = () => {
         Alert.alert(
-            'Cập nhập thông tin',
-            'Bạn có muốn cập nhập thông tin này,...???',
+            'Thêm thông tin',
+            'Bạn có muốn thêm thông tin này,...???',
             [
               {text: 'Thêm', onPress: () => {
                     if(this.state.so_xe.length == 0 || this.state.mo_ta.length == 0){
@@ -97,6 +102,75 @@ export default class MotorDetailScreen extends Component {
             }
         )
     }
+
+    // onPressUpdateMotor = (id_xe, so_xe, mo_ta) => {
+    //     this.setState ({
+    //         id_xe : id_xe,
+    //         so_xe: so_xe,
+    //         mo_ta: mo_ta,
+    //         isUpdate: true
+    //     })
+    // }
+
+    onClickUpdateMotor = () => {
+        Alert.alert(
+            'Cập nhập thông tin',
+            'Bạn có muốn cập nhập thông tin này,...???',
+            [
+              {text: 'Thêm', onPress: () => {
+                    if(this.state.so_xe.length == 0 || this.state.mo_ta.length == 0){
+                        Alert.alert("Bạn phải nhập đầy đủ thông tin,...!!!")
+                    }
+                    else{
+                        this.setState({
+                            visible: true
+                        }) 
+                        this.updateMotor()
+                    }    
+              }},              
+              {text: 'Hủy', onPress: () => {
+                    console.log('Hủy cập nhập thông tin')
+              }},
+            ],
+            {cancelable: false},
+        )
+    }
+
+    // updateMotor = async() => {
+
+    //     let headers = {
+    //         'Content-Type': 'application/json',
+    //         // 'Authorization': 'JWT ...'
+    //     }
+        
+    //     let data = {
+    //         "id_xe": this.state.id_xe,
+    //         "so_xe": this.state.so_xe,
+    //         "mo_ta": this.state.mo_ta
+    //     }
+    
+    //     await axios.post( ApiConfig.LINK + 'updateMotor', {data},{headers})
+    //     .then(response => {
+    //         let result = response.data
+    //         console.log(result);
+    //         if(result){
+    //             Alert.alert('Cập nhập dữ liệu thành công!!!');
+    //             this.setState({ isUpdate: false});
+    //             this.fetchMotorDetail();  
+    //         }
+    //         else
+    //         {
+    //             Alert.alert('Cập nhập dữ liệu không thành công!!!');
+    //         }     
+    //         this.setState({
+    //             visible: false
+    //         }) 
+    //     })
+    //     .catch(error => {
+    //             console.log(error);
+    //         }
+    //     )
+    // }
 
     onClickDeleteMotor = (id_xe) => {
         console.log(id_xe)
@@ -165,7 +239,7 @@ export default class MotorDetailScreen extends Component {
                                                 <Text style={{fontSize: Common.textSizeInput, width: '95%', textAlign: "center", marginBottom: 10}}>Mô tả: {item.mo_ta}</Text>
                                             </View>
                                             <View style={{flexDirection: 'row', width: '90%', justifyContent : 'center', alignItems: 'center', marginVertical: 5}}>
-                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onClickUpdateMotor(item.id_xe, item.so_xe, item.mo_ta)}>
+                                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.onPressUpdateMotor(item.id_xe, item.so_xe, item.mo_ta)}>
                                                     <Text style={{fontSize: Common.textSizeInput, color: '#000000'}} >Sửa</Text>
                                                 </TouchableOpacity>  
                                                 <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '90%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={() => this.onClickDeleteMotor(item.id_xe)}>
@@ -180,7 +254,7 @@ export default class MotorDetailScreen extends Component {
                         </ScrollView>  
                     </View>  
                     <View style={{flex: 1, width: '100%', height: '100%', justifyContent : 'center', alignItems: 'center', backgroundColor: Common.titleColor, borderTopLeftRadius: 15, borderTopRightRadius: 15}}>
-                        <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={() =>this.setState({ isCreate: true})}>
+                        <TouchableOpacity style={{ width: '20%', height: '60%', justifyContent : 'center', alignItems: 'center'}} onPress={this.onPressCreateMotor()}>
                             <Image source={require('@assets/images/add.png')} style={{height: '100%', width: '100%', resizeMode: 'contain'}}/> 
                         </TouchableOpacity>
                     </View>
@@ -188,29 +262,6 @@ export default class MotorDetailScreen extends Component {
 
                 {/* Thêm Thông Tin Xe  */}
                 {/* <Modal
-                    visible={this.state.isError}
-                    presentationStyle="overFullScreen"
-                    animationType="slide"
-                    transparent = {true}
-                >       
-                    <View style={{flex: 1, backgroundColor: 'rgba(59,89,152,0.5)', justifyContent: 'center', alignItems: 'center'}}>
-                        <View style={[Common.styles.popupBackground, styles.container]}>
-                            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={styles.message}> {GLOBAL.errorMessage} </Text>
-                            </View>
-                            <View style={styles.separator} />
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={() => this.setState({ isError: false })}>
-                                <Text style={[styles.button]}> {I18n.t("CANCEL")} </Text>
-                            </TouchableOpacity>
-                        </View>                        
-                        
-                    </View>
-                </Modal> */}
-
-                {/* Sửa Thông Tin Xe */} 
-                <Modal
                     visible={this.state.isCreate}
                     presentationStyle="overFullScreen"
                     animationType="slide"
@@ -246,6 +297,50 @@ export default class MotorDetailScreen extends Component {
                                     <Text style={{fontSize:15, color: '#000000'}} >Hủy</Text>
                                 </TouchableOpacity>  
                                 <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '100%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={this.onClickCreateMotor}>
+                                    <Text style={{fontSize:15, color: '#000000'}} >Lưu</Text>
+                                </TouchableOpacity>  
+                            </View>
+                        </View>      
+                    </View>
+                </Modal> */}
+
+                {/* Sửa Thông Tin Xe */} 
+                <Modal
+                    visible={this.state.isUpdate}
+                    presentationStyle="overFullScreen"
+                    animationType="slide"
+                    transparent = {true}
+                    onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                    }}
+                >
+                    <View style={{flex: 1, width: '100%', height: '100%', backgroundColor: 'rgba(59,89,152,0.5)', justifyContent: 'center', alignItems: 'center'}}>
+                        <View style={styles.form}>
+                            <View style={{flex:3, width: '95%', height: '100%', justifyContent : 'center', alignItems: 'center', borderBottomWidth: 0.5}}>
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>Số xe</Text>
+                                    <TextInput                            
+                                        placeholder='Số xe,...'
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({ so_xe : text })}
+                                    />
+                                </View>
+                                <View style={styles.viewInput}>
+                                    <Text style={styles.label}>Mô tả</Text>
+                                    <TextInput                            
+                                        placeholder='Mô tả,...'
+                                        placeholderTextColor = '#777777'
+                                        style={styles.input}
+                                        onChangeText={(text) => this.setState({ mo_ta: text})}
+                                    />  
+                                </View>                            
+                            </View>
+                            <View style={{flex:1, flexDirection: 'row', width: '90%', height: '95%', justifyContent : 'center', alignItems: 'center'}}>
+                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '100%', justifyContent: 'center', borderRightWidth: 0.25}} onPress={() => this.setState({ isUpdate: false})}>
+                                    <Text style={{fontSize:15, color: '#000000'}} >Hủy</Text>
+                                </TouchableOpacity>  
+                                <TouchableOpacity style={{flex: 1, alignItems: 'center', width: '100%', justifyContent: 'center', borderLeftWidth: 0.25}} onPress={this.onClickUpdateMotor}>
                                     <Text style={{fontSize:15, color: '#000000'}} >Lưu</Text>
                                 </TouchableOpacity>  
                             </View>

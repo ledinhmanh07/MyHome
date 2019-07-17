@@ -4,6 +4,7 @@ import * as Common from '@constants/Common'
 import * as ApiConfig from '@constants/ApiConfig'
 import axios from 'axios'
 import Wrapper from './Loading'
+import DatePicker from '@components/DatePicker'
 
 export default class UpdateProfileScreen extends Component {
     
@@ -125,13 +126,13 @@ export default class UpdateProfileScreen extends Component {
                                 </View>
                                 <View style={styles.viewInput}>
                                     <Text style={styles.label}>Ngày sinh</Text>
-                                    <TextInput                            
-                                        placeholder='Ngày sinh,...'
-                                        value={this.state.nam_sinh}
-                                        placeholderTextColor = '#777777'
-                                        style={styles.input}
-                                        onChangeText={(text) => this.setState({nam_sinh : text})}
-                                    />  
+                                    <View style={{marginLeft: '2%', width: '63%', height: '60%'}}>
+                                        <DatePicker
+                                            placeholder='Ngày sinh,...'
+                                            onChangeText={(text) => this.setState({nam_sinh : text})}
+                                            value = {this.state.nam_sinh}
+                                        />
+                                    </View>
                                 </View>
                                 <View style={styles.viewInput}>
                                     <Text style={styles.label}>Số CMND</Text>

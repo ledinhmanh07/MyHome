@@ -4,6 +4,7 @@ import * as Common from '@constants/Common'
 import axios from 'axios'
 import * as ApiConfig from '@constants/ApiConfig'
 import Wrapper from './Loading'
+import DatePicker from '@components/DatePicker'
 
 export default class CreateProfileScreen extends Component {
     
@@ -129,12 +130,12 @@ export default class CreateProfileScreen extends Component {
                                 </View>
                                 <View style={styles.viewInput}>
                                     <Text style={styles.label}>Ngày sinh</Text>
-                                    <TextInput                            
-                                        placeholder='Ngày sinh,...'
-                                        placeholderTextColor = '#777777'
-                                        style={styles.input}
-                                        onChangeText={(text) => this.setState({nam_sinh : text})}
-                                    />  
+                                    <View style={{marginLeft: '2%', width: '63%', height: '60%'}}>
+                                        <DatePicker                            
+                                            placeholder='Ngày sinh,...'
+                                            onChangeText={(text) => this.setState({nam_sinh : text})}
+                                        />
+                                    </View>                                    
                                 </View>
                                 <View style={styles.viewInput}>
                                     <Text style={styles.label}>Số CMND</Text>
@@ -143,7 +144,7 @@ export default class CreateProfileScreen extends Component {
                                         placeholderTextColor = '#777777'
                                         style={styles.input}
                                         onChangeText={(text) => this.setState({ cmnd: text})}
-                                    />  
+                                    />
                                 </View>
                                 <View style={styles.viewInput}>
                                     <Text style={styles.label}>HKTT</Text>
